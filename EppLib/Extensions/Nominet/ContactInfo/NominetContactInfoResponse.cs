@@ -45,33 +45,33 @@ namespace EppLib.Extensions.Nominet.ContactInfo
 			namespaces.AddNamespace("contact-nom-ext", "http://www.nominet.org.uk/epp/xml/contact-nom-ext-1.0");
             namespaces.AddNamespace("nom-data-quality", "http://www.nominet.org.uk/epp/xml/nom-data-quality-1.1");
 
-			var children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/contact-nom-ext:infData", namespaces);
-            var quality = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/nom-data-quality:infData", namespaces);
+			XmlNode children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/contact-nom-ext:infData", namespaces);
+            XmlNode quality = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/nom-data-quality:infData", namespaces);
 
 			if (children != null)
 			{
-				var tradeNameNode = children.SelectSingleNode("contact-nom-ext:trad-name", namespaces);
+				XmlNode tradeNameNode = children.SelectSingleNode("contact-nom-ext:trad-name", namespaces);
 
 				if (tradeNameNode != null)
 				{
 					_nomContact.TradeName = tradeNameNode.InnerText;
 				}
 
-				var coNoNode = children.SelectSingleNode("contact-nom-ext:co-no", namespaces);
+				XmlNode coNoNode = children.SelectSingleNode("contact-nom-ext:co-no", namespaces);
 
 				if (coNoNode != null)
 				{
 					_nomContact.CompanyNumber = coNoNode.InnerText;
 				}
 
-				var typeNode = children.SelectSingleNode("contact-nom-ext:type", namespaces);
+				XmlNode typeNode = children.SelectSingleNode("contact-nom-ext:type", namespaces);
 
 				if (typeNode != null)
 				{
 					_nomContact.Type = (CoType)Enum.Parse(typeof(CoType), typeNode.InnerText);
 				}
 
-				var optOutNode = children.SelectSingleNode("contact-nom-ext:opt-out", namespaces);
+				XmlNode optOutNode = children.SelectSingleNode("contact-nom-ext:opt-out", namespaces);
 				if (optOutNode != null)
 				{
 					_nomContact.OptOut = (YesNoFlag)Enum.Parse(typeof(YesNoFlag), optOutNode.InnerText);
@@ -80,17 +80,17 @@ namespace EppLib.Extensions.Nominet.ContactInfo
             if (quality != null)
             {
                 _nomDataQuality = new NominetDataQualityExtension();
-                var status = quality.SelectSingleNode("nom-data-quality:status", namespaces);
+                XmlNode status = quality.SelectSingleNode("nom-data-quality:status", namespaces);
                 if (status != null)
                 {
                     _nomDataQuality.Status = status.InnerText;
                 }
-                var reason = quality.SelectSingleNode("nom-data-quality:reason", namespaces);
+                XmlNode reason = quality.SelectSingleNode("nom-data-quality:reason", namespaces);
                 if (reason != null)
                 {
                     _nomDataQuality.Reason = reason.InnerText;
                 }
-                var dateCommenced = quality.SelectSingleNode("nom-data-quality:dateCommenced", namespaces);
+                XmlNode dateCommenced = quality.SelectSingleNode("nom-data-quality:dateCommenced", namespaces);
                 if (dateCommenced != null)
                 {
                     DateTime date;
@@ -99,7 +99,7 @@ namespace EppLib.Extensions.Nominet.ContactInfo
                         _nomDataQuality.DateCommenced = date;
                     }
                 }
-                var dateToSuspend = quality.SelectSingleNode("nom-data-quality:dateToSuspend", namespaces);
+                XmlNode dateToSuspend = quality.SelectSingleNode("nom-data-quality:dateToSuspend", namespaces);
                 if (dateToSuspend != null)
                 {
                     DateTime date;
@@ -108,11 +108,11 @@ namespace EppLib.Extensions.Nominet.ContactInfo
                         _nomDataQuality.DateToSuspend = date;
                     }
                 }
-                var lockApplied = quality.SelectSingleNode("nom-data-quality:lockApplied", namespaces);
+                XmlNode lockApplied = quality.SelectSingleNode("nom-data-quality:lockApplied", namespaces);
                 if (lockApplied != null)
                 {
                     bool lockValue;
-                    if (!Boolean.TryParse(lockApplied.InnerText, out lockValue))
+                    if (!bool.TryParse(lockApplied.InnerText, out lockValue))
                     {
                         if (lockApplied.InnerText == "1" || lockApplied.InnerText.ToLower() == "y")
                         {
@@ -125,11 +125,11 @@ namespace EppLib.Extensions.Nominet.ContactInfo
                         _nomDataQuality.LockApplied = lockValue;
                     }
                 }
-                var domainListNodes = quality.SelectSingleNode("nom-data-quality:domainListData", namespaces);
+                XmlNode domainListNodes = quality.SelectSingleNode("nom-data-quality:domainListData", namespaces);
                 if (domainListNodes != null)
                 {
                     _nomDataQuality.DomainList = new List<string>();
-                    var domainNodes = domainListNodes.SelectNodes("nom-data-quality:domainName", namespaces);
+                    XmlNodeList domainNodes = domainListNodes.SelectNodes("nom-data-quality:domainName", namespaces);
                     if (domainNodes != null)
                     {
                         foreach (XmlNode domain in domainNodes)

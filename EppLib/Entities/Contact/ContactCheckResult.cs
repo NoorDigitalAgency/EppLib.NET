@@ -28,7 +28,7 @@ namespace EppLib.Entities
 
         public ContactCheckResult(XmlNode child, XmlNamespaceManager namespaces)
         {
-            var idNode = child.SelectSingleNode("contact:id", namespaces);
+            XmlNode idNode = child.SelectSingleNode("contact:id", namespaces);
 
             if (idNode != null)
             {
@@ -36,17 +36,17 @@ namespace EppLib.Entities
 
                 if (idNode.Attributes != null)
                 {
-                    var xmlAttribute = idNode.Attributes["avail"];
+                    XmlAttribute xmlAttribute = idNode.Attributes["avail"];
 
                     if (xmlAttribute != null)
                     {
-                        var attributeValue = xmlAttribute.Value.ToLower(CultureInfo.InvariantCulture);
+                        string attributeValue = xmlAttribute.Value.ToLower(CultureInfo.InvariantCulture);
                         Available = attributeValue.Equals("true") || attributeValue.Equals("1");
                     }
                 }
             }
 
-            var reasonNode = child.SelectSingleNode("contact:reason", namespaces);
+            XmlNode reasonNode = child.SelectSingleNode("contact:reason", namespaces);
 
             if (reasonNode != null)
             {

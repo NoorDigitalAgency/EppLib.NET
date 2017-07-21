@@ -11,7 +11,7 @@ namespace EppLib.Extensions.Nominet.ContactUpdate
 
 		public override XmlNode ToXml(XmlDocument doc)
         {
-			var root = CreateElement(doc, "contact-nom-ext:update");
+			XmlElement root = CreateElement(doc, "contact-nom-ext:update");
 
 			if (!string.IsNullOrWhiteSpace(TradeName))
 			{

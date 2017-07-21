@@ -19,7 +19,7 @@ namespace EppLib.Entities
     {
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-           var poll = CreateElement(doc, "poll");
+           XmlElement poll = CreateElement(doc, "poll");
 
             poll.SetAttribute("op", Type);
 

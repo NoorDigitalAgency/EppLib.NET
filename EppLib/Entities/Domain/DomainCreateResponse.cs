@@ -24,24 +24,24 @@ namespace EppLib.Entities
         {
             namespaces.AddNamespace("domain", "urn:ietf:params:xml:ns:domain-1.0");
 
-            var children = doc.SelectSingleNode("//domain:creData", namespaces);
+            XmlNode children = doc.SelectSingleNode("//domain:creData", namespaces);
 
             if (children != null)
             {
-                var hostNode = children.SelectSingleNode("domain:name", namespaces);
+                XmlNode hostNode = children.SelectSingleNode("domain:name", namespaces);
 
                 if (hostNode != null)
                 {
                     DomainCreateResult = new DomainCreateResult {DomainName = hostNode.InnerText};
 
-                    var crDateNode = children.SelectSingleNode("domain:crDate", namespaces);
+                    XmlNode crDateNode = children.SelectSingleNode("domain:crDate", namespaces);
 
                     if (crDateNode != null)
                     {
                         DomainCreateResult.CreatedDate = crDateNode.InnerText;
                     }
 
-					var exDateNode = children.SelectSingleNode("domain:exDate", namespaces);
+					XmlNode exDateNode = children.SelectSingleNode("domain:exDate", namespaces);
 
                     if (exDateNode != null)
                     {

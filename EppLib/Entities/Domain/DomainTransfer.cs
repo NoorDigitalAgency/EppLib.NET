@@ -46,7 +46,7 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var domainTransfer = BuildCommandElement(doc, "transfer", commandRootElement, "request");
+            XmlElement domainTransfer = BuildCommandElement(doc, "transfer", commandRootElement, "request");
 
             AddXmlElement(doc, domainTransfer, "domain:name", m_name, namespaceUri);
 

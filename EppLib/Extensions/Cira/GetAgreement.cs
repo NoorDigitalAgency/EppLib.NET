@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Collections.Generic;
 using System.Xml;
 using EppLib.Entities;
@@ -22,10 +22,10 @@ namespace EppLib.Extensions.Cira
     {
         public override XmlDocument ToXml()
         {
-            var doc = new XmlDocument();
-            var root = CreateDocRoot(doc);
+            XmlDocument doc = new XmlDocument();
+            XmlElement root = CreateDocRoot(doc);
 
-            var ciraAgreementExtension = new List<EppExtension> { new CiraAgreementExtension() };
+            List<EppExtension> ciraAgreementExtension = new List<EppExtension> { new CiraAgreementExtension() };
 
             PrepareExtensionElement(doc, root, ciraAgreementExtension);
             doc.AppendChild(root);

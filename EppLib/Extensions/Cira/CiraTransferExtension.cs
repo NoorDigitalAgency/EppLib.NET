@@ -14,7 +14,6 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using EppLib.Entities;
 
 namespace EppLib.Extensions.Cira
 {
@@ -34,29 +33,29 @@ namespace EppLib.Extensions.Cira
 
         public override XmlNode ToXml(XmlDocument doc)
         {
-            var root = CreateElement(doc, "cira:ciraTransfer");
+            XmlElement root = CreateElement(doc, "cira:ciraTransfer");
 
-            var ciraChg = AddXmlElement(doc, root, "cira:ciraChg", "");
+            XmlElement ciraChg = AddXmlElement(doc, root, "cira:ciraChg", "");
 
 
-            if (!String.IsNullOrEmpty(RegistrantContactId))
+            if (!string.IsNullOrEmpty(RegistrantContactId))
             {
                 AddXmlElement(doc, ciraChg, "cira:registrant", RegistrantContactId);
             }
 
-            if(!String.IsNullOrEmpty(AdminContactId))
+            if(!string.IsNullOrEmpty(AdminContactId))
             {
-                var adminContact = AddXmlElement(doc, ciraChg, "cira:contact", AdminContactId);
+                XmlElement adminContact = AddXmlElement(doc, ciraChg, "cira:contact", AdminContactId);
                 adminContact.SetAttribute("type", "admin");
             }
 
             if (TechContactIds != null)
             {
-                foreach (var techContactId in TechContactIds)
+                foreach (string techContactId in TechContactIds)
                 {
                     if (techContactId != null)
                     {
-                        var techContact = AddXmlElement(doc, ciraChg, "cira:contact", techContactId);
+                        XmlElement techContact = AddXmlElement(doc, ciraChg, "cira:contact", techContactId);
                         techContact.SetAttribute("type", "tech");
                     }
                 }

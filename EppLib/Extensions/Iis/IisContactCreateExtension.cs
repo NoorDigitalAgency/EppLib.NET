@@ -24,14 +24,14 @@ namespace EppLib.Extensions.Iis
 
         public override XmlNode ToXml(XmlDocument doc)
         {
-            var root = CreateElement(doc, "iis:create");
+            XmlElement root = CreateElement(doc, "iis:create");
 
-            if (!String.IsNullOrWhiteSpace(OrganizationNumber))
+            if (!string.IsNullOrWhiteSpace(OrganizationNumber))
             {
                 AddXmlElement(doc, root, "iis:orgno", OrganizationNumber);
             }
 
-            if (!String.IsNullOrWhiteSpace(VatNumber))
+            if (!string.IsNullOrWhiteSpace(VatNumber))
             {
                 AddXmlElement(doc, root, "iis:vatno", VatNumber);
             }

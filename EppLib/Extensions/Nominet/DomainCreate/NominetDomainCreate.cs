@@ -19,7 +19,7 @@ namespace EppLib.Extensions.Nominet.DomainCreate
 
 		public override XmlDocument ToXml()
 		{
-			var ciraExtension = new NominetDomainCreateExtension
+			NominetDomainCreateExtension ciraExtension = new NominetDomainCreateExtension
 			                    	{
 										AutoBill = AutoBill,
 										FirstBill = FirstBill,

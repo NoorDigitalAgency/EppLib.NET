@@ -33,7 +33,7 @@ namespace EppLib.Extensions.Cira
 
         public override XmlDocument ToXml()
         {
-            var ciraExtension = new CiraTransferExtension
+            CiraTransferExtension ciraExtension = new CiraTransferExtension
                                     {
                                         RegistrantContactId = registrantContactId,
                                         AdminContactId = adminContactId,

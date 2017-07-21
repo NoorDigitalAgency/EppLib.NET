@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Xml;
 
@@ -32,7 +32,7 @@ namespace EppLib.Entities
         {
             namespaces.AddNamespace("contact", "urn:ietf:params:xml:ns:contact-1.0");
 
-            var children = doc.SelectNodes("/ns:epp/ns:response/ns:resData/contact:chkData/contact:cd", namespaces);
+            XmlNodeList children = doc.SelectNodes("/ns:epp/ns:response/ns:resData/contact:chkData/contact:cd", namespaces);
             if (children != null)
             {
                 foreach (XmlNode child in children)

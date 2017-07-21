@@ -31,18 +31,18 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var domainUpdate = BuildCommandElement(doc, "update", commandRootElement);
+            XmlElement domainUpdate = BuildCommandElement(doc, "update", commandRootElement);
 
             AddXmlElement(doc, domainUpdate, "host:name", HostName, namespaceUri);
 
-            var add_element = getAddRemoveElement(doc, ToAdd, "host:add", namespaceUri);
+            XmlElement add_element = getAddRemoveElement(doc, ToAdd, "host:add", namespaceUri);
 
             if (add_element != null)
             {
                 domainUpdate.AppendChild(add_element);
             }
 
-            var remove_element = getAddRemoveElement(doc, ToRemove, "host:rem", namespaceUri);
+            XmlElement remove_element = getAddRemoveElement(doc, ToRemove, "host:rem", namespaceUri);
 
             if (remove_element != null)
             {
@@ -51,7 +51,7 @@ namespace EppLib.Entities
 
             if (HostChange != null)
             {
-                var change_element = doc.CreateElement("host:chg", namespaceUri);
+                XmlElement change_element = doc.CreateElement("host:chg", namespaceUri);
 
                 if (HostChange.HostName != null)
                 {
@@ -76,9 +76,9 @@ namespace EppLib.Entities
                 {
                     add_remove_element = doc.CreateElement(tag_name, namespaceUri);
 
-                    foreach (var address in add_remove_items.Adresses)
+                    foreach (HostAddress address in add_remove_items.Adresses)
                     {
-                        var address_element = AddXmlElement(doc, add_remove_element, "host:addr", address.IPAddress, namespaceUri);
+                        XmlElement address_element = AddXmlElement(doc, add_remove_element, "host:addr", address.IPAddress, namespaceUri);
 
                         address_element.SetAttribute("ip", address.IPVersion);
                     }
@@ -94,10 +94,10 @@ namespace EppLib.Entities
                         add_remove_element = doc.CreateElement(tag_name, namespaceUri);
                     }
 
-                    foreach (var status in add_remove_items.Status)
+                    foreach (Status status in add_remove_items.Status)
                     {
 
-                        var status_element = AddXmlElement(doc, add_remove_element, "host:status", status.Value, namespaceUri);
+                        XmlElement status_element = AddXmlElement(doc, add_remove_element, "host:status", status.Value, namespaceUri);
 
                         status_element.SetAttribute("s", status.Type);
 

@@ -34,7 +34,7 @@ namespace EppLib.Entities
         {
             namespaces.AddNamespace("host", "urn:ietf:params:xml:ns:host-1.0");
 
-            var children = doc.SelectNodes("/ns:epp/ns:response/ns:resData/host:chkData/host:cd", namespaces);
+            XmlNodeList children = doc.SelectNodes("/ns:epp/ns:response/ns:resData/host:chkData/host:cd", namespaces);
 
             if (children != null)
             {

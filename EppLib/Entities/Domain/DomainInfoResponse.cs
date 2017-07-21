@@ -30,32 +30,32 @@ namespace EppLib.Entities
         {
             namespaces.AddNamespace("domain", "urn:ietf:params:xml:ns:domain-1.0");
 
-            var children = doc.SelectSingleNode("//domain:infData", namespaces);
+            XmlNode children = doc.SelectSingleNode("//domain:infData", namespaces);
 
             if (children != null)
             {
-                var nameNode = children.SelectSingleNode("domain:name", namespaces);
+                XmlNode nameNode = children.SelectSingleNode("domain:name", namespaces);
 
                 if (nameNode != null)
                 {
                     Domain.Name = nameNode.InnerText;
                 }
 
-                var roidNode = children.SelectSingleNode("domain:roid", namespaces);
+                XmlNode roidNode = children.SelectSingleNode("domain:roid", namespaces);
 
                 if (roidNode != null)
                 {
                     Domain.Roid = roidNode.InnerText;
                 }
 
-                var registrantNode = children.SelectSingleNode("domain:registrant", namespaces);
+                XmlNode registrantNode = children.SelectSingleNode("domain:registrant", namespaces);
 
                 if (registrantNode != null)
                 {
                     Domain.RegistrantId = registrantNode.InnerText;
                 }
 
-                var statusNodes = children.SelectNodes("domain:status", namespaces);
+                XmlNodeList statusNodes = children.SelectNodes("domain:status", namespaces);
 
                 if (statusNodes != null)
                 {
@@ -65,7 +65,7 @@ namespace EppLib.Entities
                         {
                             if (statusNode.Attributes != null)
                             {
-                                var value = statusNode.Attributes["s"].Value;
+                                string value = statusNode.Attributes["s"].Value;
 
 
                                 Domain.Status.Add(new Status(statusNode.InnerText, value));
@@ -74,7 +74,7 @@ namespace EppLib.Entities
                     }
                 }
 
-                var contactNodes = children.SelectNodes("domain:contact", namespaces);
+                XmlNodeList contactNodes = children.SelectNodes("domain:contact", namespaces);
 
                 if (contactNodes != null)
                 {
@@ -84,7 +84,7 @@ namespace EppLib.Entities
                         {
                             if (contactNode.Attributes != null)
                             {
-                                var type = contactNode.Attributes["type"].Value;
+                                string type = contactNode.Attributes["type"].Value;
 
                                 Domain.Contacts.Add(new DomainContact(contactNode.InnerText, type));
                             }
@@ -92,7 +92,7 @@ namespace EppLib.Entities
                     }
                 }
 
-                var hostNodes = children.SelectNodes("domain:host", namespaces);
+                XmlNodeList hostNodes = children.SelectNodes("domain:host", namespaces);
 
                 if (hostNodes != null)
                 {
@@ -102,11 +102,11 @@ namespace EppLib.Entities
                     }
                 }
 
-                var nsNode = children.SelectSingleNode("domain:ns", namespaces);
+                XmlNode nsNode = children.SelectSingleNode("domain:ns", namespaces);
 
                 if (nsNode != null)
                 {
-                    var hostObjNodes = nsNode.SelectNodes("domain:hostObj", namespaces);
+                    XmlNodeList hostObjNodes = nsNode.SelectNodes("domain:hostObj", namespaces);
 
                     if (hostObjNodes != null)
                     {
@@ -119,7 +119,7 @@ namespace EppLib.Entities
                         }
                     }
 
-                    var hostAttrNodes = nsNode.SelectNodes("domain:hostAttr", namespaces);
+                    XmlNodeList hostAttrNodes = nsNode.SelectNodes("domain:hostAttr", namespaces);
 
                     if (hostAttrNodes != null)
                     {
@@ -127,7 +127,7 @@ namespace EppLib.Entities
                         {
                             if (hostAttrNode != null)
                             {
-                                var hostNames = hostAttrNode.SelectNodes("domain:hostName", namespaces);
+                                XmlNodeList hostNames = hostAttrNode.SelectNodes("domain:hostName", namespaces);
 
                                 if (hostNames != null)
                                 {
@@ -142,49 +142,49 @@ namespace EppLib.Entities
                 }
 
 
-                var clIdNode = children.SelectSingleNode("domain:clID", namespaces);
+                XmlNode clIdNode = children.SelectSingleNode("domain:clID", namespaces);
 
                 if (clIdNode != null)
                 {
                     Domain.ClId = clIdNode.InnerText;
                 }
 
-                var crIdNode = children.SelectSingleNode("domain:crID", namespaces);
+                XmlNode crIdNode = children.SelectSingleNode("domain:crID", namespaces);
 
                 if (crIdNode != null)
                 {
                     Domain.CrId = crIdNode.InnerText;
                 }
 
-                var crDateNode = children.SelectSingleNode("domain:crDate", namespaces);
+                XmlNode crDateNode = children.SelectSingleNode("domain:crDate", namespaces);
 
                 if (crDateNode != null)
                 {
                     Domain.CrDate = crDateNode.InnerText;
                 }
 
-                var upIdNode = children.SelectSingleNode("domain:upID", namespaces);
+                XmlNode upIdNode = children.SelectSingleNode("domain:upID", namespaces);
 
                 if (upIdNode != null)
                 {
                     Domain.UpId = upIdNode.InnerText;
                 }
 
-                var upDateNode = children.SelectSingleNode("domain:upDate", namespaces);
+                XmlNode upDateNode = children.SelectSingleNode("domain:upDate", namespaces);
 
                 if (upDateNode != null)
                 {
                     Domain.UpDate = upDateNode.InnerText;
                 }
 
-                var trDateNode = children.SelectSingleNode("domain:trDate", namespaces);
+                XmlNode trDateNode = children.SelectSingleNode("domain:trDate", namespaces);
 
                 if (trDateNode != null)
                 {
                     Domain.TrDate = trDateNode.InnerText;
                 }
 
-                var exDateNode = children.SelectSingleNode("domain:exDate", namespaces);
+                XmlNode exDateNode = children.SelectSingleNode("domain:exDate", namespaces);
 
                 if (exDateNode != null)
                 {
@@ -192,7 +192,7 @@ namespace EppLib.Entities
                 }
 
                 //read authinfo .. maybe this should be part of all the objects  or not
-                var passwordNode = children.SelectSingleNode("domain:authInfo/domain:pw", namespaces);
+                XmlNode passwordNode = children.SelectSingleNode("domain:authInfo/domain:pw", namespaces);
 
                 if (passwordNode != null)
                 {

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using EppLib.Entities;
 
@@ -30,30 +27,30 @@ namespace EppLib.Extensions.Nominet.Notifications
             base.ProcessDataNode(doc, namespaces);
 
             namespaces.AddNamespace("abuse-feed", "http://www.nominet.org.uk/epp/xml/nom-abuse-feed-1.0");
-            var abuseFeedNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/abuse-feed:infData", namespaces);
+            XmlNode abuseFeedNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/abuse-feed:infData", namespaces);
 
             if (abuseFeedNode != null)
             {
-                var keyNode = abuseFeedNode.SelectSingleNode("abuse-feed:key", namespaces);
+                XmlNode keyNode = abuseFeedNode.SelectSingleNode("abuse-feed:key", namespaces);
                 if (keyNode != null)
                 {
                     DomainName = keyNode.InnerText;
                     Key = keyNode.InnerText;
                 }
 
-                var activityNode = abuseFeedNode.SelectSingleNode("abuse-feed:activity", namespaces);
+                XmlNode activityNode = abuseFeedNode.SelectSingleNode("abuse-feed:activity", namespaces);
                 Activity = activityNode != null ? activityNode.InnerText : null;
                 
-                var sourceNode = abuseFeedNode.SelectSingleNode("abuse-feed:source", namespaces);
+                XmlNode sourceNode = abuseFeedNode.SelectSingleNode("abuse-feed:source", namespaces);
                 Source = sourceNode != null ? sourceNode.InnerText : null;
 
-                var hostnameNode = abuseFeedNode.SelectSingleNode("abuse-feed:hostname", namespaces);
+                XmlNode hostnameNode = abuseFeedNode.SelectSingleNode("abuse-feed:hostname", namespaces);
                 HostName = hostnameNode != null ? hostnameNode.InnerText : null;
 
-                var urlNode = abuseFeedNode.SelectSingleNode("abuse-feed:url", namespaces);
+                XmlNode urlNode = abuseFeedNode.SelectSingleNode("abuse-feed:url", namespaces);
                 Url = urlNode != null ? urlNode.InnerText : null;
 
-                var dateNode = abuseFeedNode.SelectSingleNode("abuse-feed:date", namespaces);
+                XmlNode dateNode = abuseFeedNode.SelectSingleNode("abuse-feed:date", namespaces);
                 if (dateNode != null)
                 {
                     DateTime parsedDate;
@@ -63,19 +60,19 @@ namespace EppLib.Extensions.Nominet.Notifications
                     }
                 }
 
-                var ipNode = abuseFeedNode.SelectSingleNode("abuse-feed:ip", namespaces);
+                XmlNode ipNode = abuseFeedNode.SelectSingleNode("abuse-feed:ip", namespaces);
                 Ip = ipNode != null ? ipNode.InnerText : null;
 
-                var nameserverNode = abuseFeedNode.SelectSingleNode("abuse-feed:nameserver", namespaces);
+                XmlNode nameserverNode = abuseFeedNode.SelectSingleNode("abuse-feed:nameserver", namespaces);
                 Nameserver = nameserverNode != null ? nameserverNode.InnerText : null;
 
-                var dnsAdminNode = abuseFeedNode.SelectSingleNode("abuse-feed:dnsAdmin", namespaces);
+                XmlNode dnsAdminNode = abuseFeedNode.SelectSingleNode("abuse-feed:dnsAdmin", namespaces);
                 DnsAdmin = dnsAdminNode != null ? dnsAdminNode.InnerText : null;
 
-                var targetNode = abuseFeedNode.SelectSingleNode("abuse-feed:target", namespaces);
+                XmlNode targetNode = abuseFeedNode.SelectSingleNode("abuse-feed:target", namespaces);
                 Target = targetNode != null ? targetNode.InnerText : null;
 
-                var wholeDomainNode = abuseFeedNode.SelectSingleNode("abuse-feed:wholeDomain", namespaces);
+                XmlNode wholeDomainNode = abuseFeedNode.SelectSingleNode("abuse-feed:wholeDomain", namespaces);
                 if (wholeDomainNode != null)
                 {
                     WholeDomain = (YesNoFlag)Enum.Parse(typeof(YesNoFlag), wholeDomainNode.InnerText);

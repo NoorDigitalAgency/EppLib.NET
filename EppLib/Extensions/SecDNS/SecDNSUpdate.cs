@@ -14,18 +14,18 @@ namespace EppLib.Extensions.SecDNS
 
         public override XmlNode ToXml(XmlDocument doc)
         {
-            var root = doc.CreateElement("secDNS:update", "urn:ietf:params:xml:ns:secDNS-1.1");
+            XmlElement root = doc.CreateElement("secDNS:update", "urn:ietf:params:xml:ns:secDNS-1.1");
             root.SetAttribute("xmlns:secDNS", "urn:ietf:params:xml:ns:secDNS-1.1");
 
-            var xsd = doc.CreateAttribute("xsi", "schemaLocation", "http://www.w3.org/2001/XMLSchema-instance");
+            XmlAttribute xsd = doc.CreateAttribute("xsi", "schemaLocation", "http://www.w3.org/2001/XMLSchema-instance");
             xsd.Value = "urn:ietf:params:xml:ns:secDNS-1.1 secDNS-1.1.xsd";
             root.Attributes.Append(xsd);
 
             if (ToRemove.Any())
             {
-                var removeNode = doc.CreateElement("secDNS:rem", "urn:ietf:params:xml:ns:secDNS-1.1");
+                XmlElement removeNode = doc.CreateElement("secDNS:rem", "urn:ietf:params:xml:ns:secDNS-1.1");
 
-                foreach (var data in ToRemove)
+                foreach (SecDNSData data in ToRemove)
                 {
                     removeNode.AppendChild(data.ToXml(doc));
                 }
@@ -35,9 +35,9 @@ namespace EppLib.Extensions.SecDNS
 
             if (ToAdd.Any())
             {
-                var addNode = doc.CreateElement("secDNS:add", "urn:ietf:params:xml:ns:secDNS-1.1");
+                XmlElement addNode = doc.CreateElement("secDNS:add", "urn:ietf:params:xml:ns:secDNS-1.1");
 
-                foreach (var data in ToAdd)
+                foreach (SecDNSData data in ToAdd)
                 {
                     addNode.AppendChild(data.ToXml(doc));
                 }

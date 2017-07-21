@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 using EppLib.Entities;
 
 namespace EppLib.Extensions.Nominet.Notifications
@@ -19,17 +15,17 @@ namespace EppLib.Extensions.Nominet.Notifications
             base.ProcessDataNode(doc, namespaces);
 
             namespaces.AddNamespace("n", "http://www.nominet.org.uk/epp/xml/std-notifications-1.2");
-            var domainCancelledNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/n:cancData", namespaces);
+            XmlNode domainCancelledNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/n:cancData", namespaces);
 
             if (domainCancelledNode != null)
             {
-                var domainNameNode = domainCancelledNode.SelectSingleNode("n:domainName", namespaces);
+                XmlNode domainNameNode = domainCancelledNode.SelectSingleNode("n:domainName", namespaces);
                 if (domainNameNode != null)
                 {
                     DomainName = domainNameNode.InnerText;
                 }
 
-                var originatorNode = domainCancelledNode.SelectSingleNode("n:orig", namespaces);
+                XmlNode originatorNode = domainCancelledNode.SelectSingleNode("n:orig", namespaces);
                 if (originatorNode != null)
                 {
                     Originator = originatorNode.InnerText;

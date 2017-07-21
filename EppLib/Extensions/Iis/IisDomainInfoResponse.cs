@@ -13,7 +13,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Xml;
 using EppLib.Entities;
 
@@ -55,7 +54,7 @@ namespace EppLib.Extensions.Iis
             //namespaces.AddNamespace("domain", "urn:ietf:params:xml:ns:domain-1.0");
             namespaces.AddNamespace("iis", "urn:se:iis:xml:epp:iis-1.2");
 
-            var children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/iis:infData", namespaces);
+            XmlNode children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/iis:infData", namespaces);
 
             if (children != null)
             {
@@ -74,9 +73,9 @@ namespace EppLib.Extensions.Iis
                 node = children.SelectSingleNode("iis:clientDelete", namespaces);
                 if (node != null)
                 {
-                    var innerText = node.InnerText;
+                    string innerText = node.InnerText;
 
-                    if (!String.IsNullOrEmpty(innerText))
+                    if (!string.IsNullOrEmpty(innerText))
                     {
 
                         if(innerText.Equals("1") || innerText.ToLowerInvariant().Equals("true"))

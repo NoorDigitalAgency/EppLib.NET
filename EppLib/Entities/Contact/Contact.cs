@@ -19,7 +19,7 @@ namespace EppLib.Entities
     {
         public Contact(string contactId, string fullName, string companyName, string city, string street1, string street2, string street3, string province, string postalCode, string countryCode, string email, Telephone voice, Telephone fax)
         {
-            var postalAddress = new PostalAddress
+            PostalAddress postalAddress = new PostalAddress
             {
                 City = city,
                 Street1 = street1,

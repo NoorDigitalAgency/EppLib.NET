@@ -24,7 +24,7 @@ namespace EppLib.Extensions.Cira
 
         public override XmlDocument ToXml()
         {
-            var ciraExtension = new CiraCreateExtension
+            CiraCreateExtension ciraExtension = new CiraCreateExtension
             {
                 Language = Language,
                 OriginatingIpAddress = OriginatingIpAddress,

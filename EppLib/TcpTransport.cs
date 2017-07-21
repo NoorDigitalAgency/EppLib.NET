@@ -62,7 +62,7 @@ namespace EppLib
         /// </summary>
         public void Connect(SslProtocols sslProtocols)
         {
-            var client = new TcpClient(EPP_REGISTRY_COM, PORT);
+            TcpClient client = new TcpClient(EPP_REGISTRY_COM, PORT);
 
             stream = new SslStream(client.GetStream(), false, ValidateServerCertificate)
                      {
@@ -72,7 +72,7 @@ namespace EppLib
 
             if (clientCertificate != null)
             {
-                var clientCertificates = new X509CertificateCollection {clientCertificate};
+                X509CertificateCollection clientCertificates = new X509CertificateCollection {clientCertificate};
 
                 stream.AuthenticateAsClient(EPP_REGISTRY_COM, clientCertificates, sslProtocols, false);
             }
@@ -103,7 +103,7 @@ namespace EppLib
         /// <returns></returns>
         public byte[] Read()
         {
-            var lenghtBytes = new byte[4];
+            byte[] lenghtBytes = new byte[4];
             int read = 0;
 
             while (read < 4)
@@ -113,16 +113,16 @@ namespace EppLib
 
             Array.Reverse(lenghtBytes);
 
-            var length = BitConverter.ToInt32(lenghtBytes, 0) - 4;
+            int length = BitConverter.ToInt32(lenghtBytes, 0) - 4;
 
             if (loggingEnabled)
             {
                 Debug.Log("Reading " + length + " bytes.");
             }
 
-            var bytes = new byte[length];
+            byte[] bytes = new byte[length];
 
-            var returned = 0;
+            int returned = 0;
 
             while (returned != length)
             {
@@ -144,11 +144,11 @@ namespace EppLib
         /// <param name="s"></param>
         public void Write(XmlDocument s)
         {
-            var bytes = GetBytes(s);
+            byte[] bytes = GetBytes(s);
 
-            var lenght = bytes.Length + 4;
+            int lenght = bytes.Length + 4;
 
-            var lenghtBytes = BitConverter.GetBytes(lenght);
+            byte[] lenghtBytes = BitConverter.GetBytes(lenght);
             Array.Reverse(lenghtBytes);
 
             stream.Write(lenghtBytes, 0, 4);

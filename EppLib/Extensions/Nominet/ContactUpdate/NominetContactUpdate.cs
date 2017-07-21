@@ -13,7 +13,7 @@ namespace EppLib.Extensions.Nominet.ContactUpdate
 
 		public override XmlDocument ToXml()
 		{
-			var updateExt = new NominetContactUpdateExtension
+			NominetContactUpdateExtension updateExt = new NominetContactUpdateExtension
 			                	{
 			                		TradeName = TradeName,
 			                		Type = Type,

@@ -19,32 +19,32 @@ namespace EppLib.Extensions.Nominet.Notifications
 			base.ProcessDataNode(doc, namespaces);
 
 			namespaces.AddNamespace("n", "http://www.nominet.org.uk/epp/xml/std-notifications-1.2");
-			var domainReleasedNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/n:relData", namespaces);
+			XmlNode domainReleasedNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/n:relData", namespaces);
 
 			if (domainReleasedNode != null)
 			{
-				var accountNode = domainReleasedNode.SelectSingleNode("n:accountId", namespaces);
+				XmlNode accountNode = domainReleasedNode.SelectSingleNode("n:accountId", namespaces);
 				if (accountNode != null)
 				{
 					AccountId = accountNode.InnerText;
 				}
 
-				var fromNode = domainReleasedNode.SelectSingleNode("n:from", namespaces);
+				XmlNode fromNode = domainReleasedNode.SelectSingleNode("n:from", namespaces);
 				if (fromNode != null)
 				{
 					From = fromNode.InnerText;
 				}
 
-				var registrarNode = domainReleasedNode.SelectSingleNode("n:registrarTag", namespaces);
+				XmlNode registrarNode = domainReleasedNode.SelectSingleNode("n:registrarTag", namespaces);
 				if (registrarNode != null)
 				{
 					RegistrarTag = registrarNode.InnerText;
 				}
 
-				var domainListNode = domainReleasedNode.SelectSingleNode("n:domainListData", namespaces);
+				XmlNode domainListNode = domainReleasedNode.SelectSingleNode("n:domainListData", namespaces);
 				if (domainListNode != null)
 				{
-					var nodes = domainListNode.SelectNodes("n:domainName", namespaces);
+					XmlNodeList nodes = domainListNode.SelectNodes("n:domainName", namespaces);
 					if (nodes != null)
 					{
 						DomainList = new List<string>();

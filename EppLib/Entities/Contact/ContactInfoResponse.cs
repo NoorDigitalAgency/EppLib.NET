@@ -33,32 +33,32 @@ namespace EppLib.Entities
         {
             namespaces.AddNamespace("contact", "urn:ietf:params:xml:ns:contact-1.0");
 
-            var children = doc.SelectSingleNode("//contact:infData", namespaces);
+            XmlNode children = doc.SelectSingleNode("//contact:infData", namespaces);
 
             if (children != null)
             {
-                var idNode = children.SelectSingleNode("contact:id", namespaces);
+                XmlNode idNode = children.SelectSingleNode("contact:id", namespaces);
 
                 if (idNode != null)
                 {
                     Contact.Id = idNode.InnerText;
                 }
 
-                var roidNode = children.SelectSingleNode("contact:roid", namespaces);
+                XmlNode roidNode = children.SelectSingleNode("contact:roid", namespaces);
 
                 if (roidNode != null)
                 {
                     Contact.Roid = roidNode.InnerText;
                 }
 
-                var statusNode = children.SelectSingleNode("contact:status", namespaces);
+                XmlNode statusNode = children.SelectSingleNode("contact:status", namespaces);
 
                 if (statusNode != null)
                 {
                     if (statusNode.Attributes["s"] != null) Contact.Status = statusNode.Attributes["s"].Value;
                 }
 
-                var statusNodes = children.SelectNodes("contact:status", namespaces);
+                XmlNodeList statusNodes = children.SelectNodes("contact:status", namespaces);
 
                 if (statusNodes != null)
                 {
@@ -69,14 +69,14 @@ namespace EppLib.Entities
                     }
                 }
 
-                var emailNode = children.SelectSingleNode("contact:email", namespaces);
+                XmlNode emailNode = children.SelectSingleNode("contact:email", namespaces);
 
                 if (emailNode != null)
                 {
                     Contact.Email = emailNode.InnerText;
                 }
 
-                var voiceNode = children.SelectSingleNode("contact:voice", namespaces);
+                XmlNode voiceNode = children.SelectSingleNode("contact:voice", namespaces);
 
                 if (voiceNode != null)
                 {
@@ -87,60 +87,60 @@ namespace EppLib.Entities
                     }
                 }
 
-                var faxNode = children.SelectSingleNode("contact:fax", namespaces);
+                XmlNode faxNode = children.SelectSingleNode("contact:fax", namespaces);
 
                 if (faxNode != null)
                 {
                     Contact.Fax = new Telephone(faxNode.InnerText, "");
                 }
 
-                var clIdNode = children.SelectSingleNode("contact:clID", namespaces);
+                XmlNode clIdNode = children.SelectSingleNode("contact:clID", namespaces);
 
                 if (clIdNode != null)
                 {
                     Contact.ClId = clIdNode.InnerText;
                 }
 
-                var crIdNode = children.SelectSingleNode("contact:crID", namespaces);
+                XmlNode crIdNode = children.SelectSingleNode("contact:crID", namespaces);
 
                 if (crIdNode != null)
                 {
                     Contact.CrId = crIdNode.InnerText;
                 }
 
-                var upIdNode = children.SelectSingleNode("contact:upID", namespaces);
+                XmlNode upIdNode = children.SelectSingleNode("contact:upID", namespaces);
 
                 if (upIdNode != null)
                 {
                     Contact.UpId = upIdNode.InnerText;
                 }
 
-                var crDateNode = children.SelectSingleNode("contact:crDate", namespaces);
+                XmlNode crDateNode = children.SelectSingleNode("contact:crDate", namespaces);
 
                 if (crDateNode != null)
                 {
                     Contact.CrDate = crDateNode.InnerText;
                 }
 
-                var upDateNode = children.SelectSingleNode("contact:upDate", namespaces);
+                XmlNode upDateNode = children.SelectSingleNode("contact:upDate", namespaces);
 
                 if (upDateNode != null)
                 {
                     Contact.UpDate = upDateNode.InnerText;
                 }
 
-                var trDateNode = children.SelectSingleNode("contact:trDate", namespaces);
+                XmlNode trDateNode = children.SelectSingleNode("contact:trDate", namespaces);
 
                 if (trDateNode != null)
                 {
                     Contact.TrDate = trDateNode.InnerText;
                 }
 
-                var authInfoNode = children.SelectSingleNode("contact:authInfo", namespaces);
+                XmlNode authInfoNode = children.SelectSingleNode("contact:authInfo", namespaces);
 
                 if (authInfoNode != null)
                 {
-                    var pwNode = authInfoNode.SelectSingleNode("contact:pw", namespaces);
+                    XmlNode pwNode = authInfoNode.SelectSingleNode("contact:pw", namespaces);
 
                     if (pwNode != null)
                     {
@@ -148,12 +148,12 @@ namespace EppLib.Entities
                     }
                 }
 
-                var discloseNode = children.SelectSingleNode("contact:disclose", namespaces);
+                XmlNode discloseNode = children.SelectSingleNode("contact:disclose", namespaces);
 
                 if (discloseNode != null)
                 {
                     bool flag;
-                    if (!Boolean.TryParse(discloseNode.Attributes["flag"].Value, out flag))
+                    if (!bool.TryParse(discloseNode.Attributes["flag"].Value, out flag))
                     {
                         if (discloseNode.Attributes["flag"].Value == "0")
                         {
@@ -236,20 +236,20 @@ namespace EppLib.Entities
                     }
                 }
 
-                var postalInfoNode = children.SelectSingleNode("contact:postalInfo", namespaces);
+                XmlNode postalInfoNode = children.SelectSingleNode("contact:postalInfo", namespaces);
 
                 if (postalInfoNode != null)
                 {
                     Contact.PostalInfo = new PostalInfo();
 
-                    var nameNode = postalInfoNode.SelectSingleNode("contact:name", namespaces);
+                    XmlNode nameNode = postalInfoNode.SelectSingleNode("contact:name", namespaces);
 
                     if (nameNode != null)
                     {
                         Contact.PostalInfo.m_name = nameNode.InnerText;
                     }
 
-                    var orgNode = postalInfoNode.SelectSingleNode("contact:org", namespaces);
+                    XmlNode orgNode = postalInfoNode.SelectSingleNode("contact:org", namespaces);
 
                     if (orgNode != null)
                     {
@@ -258,13 +258,13 @@ namespace EppLib.Entities
 
                     Contact.PostalInfo.m_type = postalInfoNode.Attributes["type"].Value;
 
-                    var addrNode = postalInfoNode.SelectSingleNode("contact:addr", namespaces);
+                    XmlNode addrNode = postalInfoNode.SelectSingleNode("contact:addr", namespaces);
 
                     if (addrNode != null)
                     {
                         Contact.PostalInfo.m_address = new PostalAddress();
 
-                        var streetNodes = addrNode.SelectNodes("contact:street", namespaces);
+                        XmlNodeList streetNodes = addrNode.SelectNodes("contact:street", namespaces);
                         if (streetNodes != null)
                         {
                             if (streetNodes[0] != null)
@@ -283,28 +283,28 @@ namespace EppLib.Entities
                             }
                         }
 
-                        var cityNode = addrNode.SelectSingleNode("contact:city", namespaces);
+                        XmlNode cityNode = addrNode.SelectSingleNode("contact:city", namespaces);
 
                         if (cityNode != null)
                         {
                             Contact.PostalInfo.m_address.City = cityNode.InnerText;
                         }
 
-                        var spNode = addrNode.SelectSingleNode("contact:sp", namespaces);
+                        XmlNode spNode = addrNode.SelectSingleNode("contact:sp", namespaces);
 
                         if (spNode != null)
                         {
                             Contact.PostalInfo.m_address.StateProvince = spNode.InnerText;
                         }
 
-                        var pcNode = addrNode.SelectSingleNode("contact:pc", namespaces);
+                        XmlNode pcNode = addrNode.SelectSingleNode("contact:pc", namespaces);
 
                         if (pcNode != null)
                         {
                             Contact.PostalInfo.m_address.PostalCode = pcNode.InnerText;
                         }
 
-                        var ccNode = addrNode.SelectSingleNode("contact:cc", namespaces);
+                        XmlNode ccNode = addrNode.SelectSingleNode("contact:cc", namespaces);
 
                         if (ccNode != null)
                         {
@@ -319,46 +319,46 @@ namespace EppLib.Entities
         {
             namespaces.AddNamespace("cira", "urn:ietf:params:xml:ns:cira-1.0");
 
-            var children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/cira:ciraInfo", namespaces);
+            XmlNode children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/cira:ciraInfo", namespaces);
 
             if (children != null)
             {
-                var crLanguage = children.SelectSingleNode("cira:language", namespaces);
+                XmlNode crLanguage = children.SelectSingleNode("cira:language", namespaces);
 
                 if (crLanguage != null)
                 {
                     Contact.Language = crLanguage.InnerText;
                 }
 
-                var crCprCategory = children.SelectSingleNode("cira:cprCategory", namespaces);
+                XmlNode crCprCategory = children.SelectSingleNode("cira:cprCategory", namespaces);
 
                 if (crCprCategory != null)
                 {
                     Contact.CprCategory = crCprCategory.InnerText;
                 }
 
-                var crIndividual = children.SelectSingleNode("cira:individual", namespaces);
+                XmlNode crIndividual = children.SelectSingleNode("cira:individual", namespaces);
 
                 if (crIndividual != null)
                 {
                     Contact.Individual = crIndividual.InnerText;
                 }
 
-                var crCiraAgreementVersion = children.SelectSingleNode("cira:ciraAgreementVersion", namespaces);
+                XmlNode crCiraAgreementVersion = children.SelectSingleNode("cira:ciraAgreementVersion", namespaces);
 
                 if (crCiraAgreementVersion != null)
                 {
                     Contact.CiraAgreementVersion = crCiraAgreementVersion.InnerText;
                 }
 
-                var crAgreementTimestamp = children.SelectSingleNode("cira:agreementTimestamp", namespaces);
+                XmlNode crAgreementTimestamp = children.SelectSingleNode("cira:agreementTimestamp", namespaces);
 
                 if (crAgreementTimestamp != null)
                 {
                     Contact.AgreementTimestamp = crAgreementTimestamp.InnerText;
                 }
 
-                var crWhoisDisplaySetting = children.SelectSingleNode("cira:whoisDisplaySetting", namespaces);
+                XmlNode crWhoisDisplaySetting = children.SelectSingleNode("cira:whoisDisplaySetting", namespaces);
 
                 if (crWhoisDisplaySetting != null)
                 {

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using EppLib.Entities;
 
@@ -15,13 +12,13 @@ namespace EppLib.Extensions.Nominet.DomainCheck
 
         public override XmlNode ToXml(XmlDocument doc)
         {
-            var root = CreateElement(doc, "nom-direct-rights:check");
+            XmlElement root = CreateElement(doc, "nom-direct-rights:check");
 
             if (PostalInfo != null)
             {
                 root.SetAttribute("xmlns:contact", ContactNamespace);
 
-                var xml = AddressToXml(doc, "nom-direct-rights:postalInfo", PostalInfo);
+                XmlElement xml = AddressToXml(doc, "nom-direct-rights:postalInfo", PostalInfo);
 
                 root.AppendChild(xml);
             }
@@ -40,7 +37,7 @@ namespace EppLib.Extensions.Nominet.DomainCheck
         }
 
         protected XmlElement AddressToXml(XmlDocument doc,
-                                          String tagName,
+                                          string tagName,
                                           PostalInfo nameAddress)
         {
             XmlElement name_address_element = null;
@@ -67,8 +64,8 @@ namespace EppLib.Extensions.Nominet.DomainCheck
 
                 if (nameAddress.m_address != null)
                 {
-                    var address = nameAddress.m_address;
-                    var address_element = doc.CreateElement("contact:addr", ContactNamespace);
+                    PostalAddress address = nameAddress.m_address;
+                    XmlElement address_element = doc.CreateElement("contact:addr", ContactNamespace);
                     // Because this method is used by contact create and update,
                     // the lowest common denominator (update), says that all
                     // members are optional.

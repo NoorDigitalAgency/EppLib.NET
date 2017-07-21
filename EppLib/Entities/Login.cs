@@ -36,7 +36,7 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var login = CreateElement(doc, "login");
+            XmlElement login = CreateElement(doc, "login");
 
             AddXmlElement(doc, login, "clID", clientId);
             AddXmlElement(doc, login, "pw", password);
@@ -44,7 +44,7 @@ namespace EppLib.Entities
 
             if (Options != null)
             {
-                var options_element = CreateElement(doc, "options");
+                XmlElement options_element = CreateElement(doc, "options");
 
                 if (Options.MVersion != null)
                 {
@@ -61,18 +61,18 @@ namespace EppLib.Entities
 
             if (Services != null)
             {
-                var svcs_element = CreateElement(doc, "svcs");
+                XmlElement svcs_element = CreateElement(doc, "svcs");
 
-                foreach (var svc in Services.ObjURIs)
+                foreach (string svc in Services.ObjURIs)
                 {
                     AddXmlElement(doc, svcs_element, "objURI", svc);
                 }
 
                 if (Services.Extensions != null)
                 {
-                    var svc_extension = CreateElement(doc, "svcExtension");
+                    XmlElement svc_extension = CreateElement(doc, "svcExtension");
 
-                    foreach (var extension in Services.Extensions)
+                    foreach (string extension in Services.Extensions)
                     {
                         AddXmlElement(doc, svc_extension, "extURI", extension);
                     }

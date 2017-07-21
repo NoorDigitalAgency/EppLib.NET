@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Collections.Generic;
 using System.Xml;
 
@@ -33,9 +33,9 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var hostCheck = BuildCommandElement(doc, "check", commandRootElement);
+            XmlElement hostCheck = BuildCommandElement(doc, "check", commandRootElement);
 
-            foreach (var host in hosts)
+            foreach (string host in hosts)
             {
                 AddXmlElement(doc, hostCheck, "host:name", host, namespaceUri);
             }

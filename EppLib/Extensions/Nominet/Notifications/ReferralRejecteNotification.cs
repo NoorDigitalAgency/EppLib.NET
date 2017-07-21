@@ -16,17 +16,17 @@ namespace EppLib.Extensions.Nominet.Notifications
 			base.ProcessDataNode(doc, namespaces);
 
 			namespaces.AddNamespace("n", "http://www.nominet.org.uk/epp/xml/std-notifications-1.2");
-			var failDataNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/n:domainFailData", namespaces);
+			XmlNode failDataNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/n:domainFailData", namespaces);
 
 			if (failDataNode != null)
 			{
-				var domainName = failDataNode.SelectSingleNode("n:domainName", namespaces);
+				XmlNode domainName = failDataNode.SelectSingleNode("n:domainName", namespaces);
 				if (domainName != null)
 				{
 					RejectedDomain = domainName.InnerText;
 				}
 
-				var reasonNode = failDataNode.SelectSingleNode("n:reason", namespaces);
+				XmlNode reasonNode = failDataNode.SelectSingleNode("n:reason", namespaces);
 				if (reasonNode != null)
 				{
 					RejectedReason = reasonNode.InnerText;

@@ -28,7 +28,7 @@ namespace EppLib.Entities
 
         public HostCheckResult(XmlNode child, XmlNamespaceManager namespaces)
         {
-            var nameNode = child.SelectSingleNode("host:name", namespaces);
+            XmlNode nameNode = child.SelectSingleNode("host:name", namespaces);
 
             if (nameNode != null)
             {
@@ -36,17 +36,17 @@ namespace EppLib.Entities
 
                 if (nameNode.Attributes != null)
                 {
-                    var xmlAttribute = nameNode.Attributes["avail"];
+                    XmlAttribute xmlAttribute = nameNode.Attributes["avail"];
 
                     if (xmlAttribute != null)
                     {
-                        var attributeValue = xmlAttribute.Value.ToLower(CultureInfo.InvariantCulture);
+                        string attributeValue = xmlAttribute.Value.ToLower(CultureInfo.InvariantCulture);
                         Available = attributeValue.Equals("true") || attributeValue.Equals("1");
                     }
                 }
             }
 
-            var reasonNode = child.SelectSingleNode("host:reason", namespaces);
+            XmlNode reasonNode = child.SelectSingleNode("host:reason", namespaces);
 
             if (reasonNode != null)
             {

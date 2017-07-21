@@ -31,11 +31,11 @@ namespace EppLib.Extensions.Iis
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var domainInfo = BuildCommandElement(doc, "info", commandRootElement);
+            XmlElement domainInfo = BuildCommandElement(doc, "info", commandRootElement);
 
-            var domainNameElement = AddXmlElement(doc, domainInfo, "domain:name", domainName, namespaceUri);
+            XmlElement domainNameElement = AddXmlElement(doc, domainInfo, "domain:name", domainName, namespaceUri);
 
-            if (!String.IsNullOrEmpty(Hosts))
+            if (!string.IsNullOrEmpty(Hosts))
             {
                 domainNameElement.SetAttribute("hosts", Hosts);
             }

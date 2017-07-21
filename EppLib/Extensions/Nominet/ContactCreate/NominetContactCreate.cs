@@ -28,7 +28,7 @@ namespace EppLib.Extensions.Nominet.ContactCreate
 
 		public override XmlDocument ToXml()
 		{
-			var createExt = new NominetContactCreateExtension
+			NominetContactCreateExtension createExt = new NominetContactCreateExtension
 			                	{
 			                		TradeName = TradeName,
 									CompanyNumber = CompanyNumber,

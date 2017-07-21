@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Xml;
 using EppLib.Entities;
 
@@ -55,7 +54,7 @@ namespace EppLib.Extensions.Iis
             //namespaces.AddNamespace("contact", "urn:ietf:params:xml:ns:contact-1.0");
             namespaces.AddNamespace("iis", "urn:se:iis:xml:epp:iis-1.2");
 
-            var children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/iis:infData", namespaces);
+            XmlNode children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/iis:infData", namespaces);
 
             if (children != null)
             {

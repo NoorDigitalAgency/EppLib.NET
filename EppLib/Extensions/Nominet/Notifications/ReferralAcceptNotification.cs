@@ -15,11 +15,11 @@ namespace EppLib.Extensions.Nominet.Notifications
 			base.ProcessDataNode(doc, namespaces);
 
 			namespaces.AddNamespace("domain", "urn:ietf:params:xml:ns:domain-1.0");
-			var domainCreateDataNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/domain:creData", namespaces);
+			XmlNode domainCreateDataNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/domain:creData", namespaces);
 
 			if (domainCreateDataNode != null)
 			{
-				var domainRes = new DomainCreateResponse(domainCreateDataNode.OuterXml);
+				DomainCreateResponse domainRes = new DomainCreateResponse(domainCreateDataNode.OuterXml);
 				DomainCreateResult = domainRes.DomainCreateResult;
 			}
 		}

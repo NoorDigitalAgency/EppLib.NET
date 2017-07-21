@@ -32,11 +32,11 @@ namespace EppLib.Entities
         {
             if (extensions != null && extensions.Count()>0)
             {
-                var extension_element = CreateElement(doc,"extension");
+                XmlElement extension_element = CreateElement(doc,"extension");
 
-                foreach (var extension in extensions)
+                foreach (EppExtension extension in extensions)
                 {
-                    var extension_node = doc.ImportNode(extension.ToXml(doc), true);
+                    XmlNode extension_node = doc.ImportNode(extension.ToXml(doc), true);
 
                     extension_element.AppendChild(extension_node);
 
@@ -58,7 +58,7 @@ namespace EppLib.Entities
 
         private static XmlElement CreateDocRoot(string rootString, XmlDocument doc, string prefix)
         {
-            var schema = new XmlSchema();
+            XmlSchema schema = new XmlSchema();
 
             schema.Namespaces.Add(prefix, _urnIetfParamsXmlNsEpp);
 
@@ -66,18 +66,18 @@ namespace EppLib.Entities
 
             doc.AppendChild(doc.CreateXmlDeclaration("1.0", "UTF-8", "no"));
 
-            var root = doc.CreateElement(rootString, _urnIetfParamsXmlNsEpp);
+            XmlElement root = doc.CreateElement(rootString, _urnIetfParamsXmlNsEpp);
 
-            var xsd = doc.CreateAttribute("xsi", "schemaLocation", "http://www.w3.org/2001/XMLSchema-instance");
+            XmlAttribute xsd = doc.CreateAttribute("xsi", "schemaLocation", "http://www.w3.org/2001/XMLSchema-instance");
             xsd.Value = "urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd";
             root.Attributes.Append(xsd);
 
             return root;
         }
 
-        protected static XmlElement AddXmlElement(XmlDocument doc, XmlElement containingElement, String tagName, String value)
+        protected static XmlElement AddXmlElement(XmlDocument doc, XmlElement containingElement, string tagName, string value)
         {
-            var xml_element = CreateElement(doc, tagName);
+            XmlElement xml_element = CreateElement(doc, tagName);
 
             if (!string.IsNullOrEmpty(value))
             {
@@ -87,9 +87,9 @@ namespace EppLib.Entities
             return xml_element;
         }
 
-        protected static XmlElement AddXmlElement(XmlDocument doc, XmlElement containingElement, String tagName, String value, string namespaceUri)
+        protected static XmlElement AddXmlElement(XmlDocument doc, XmlElement containingElement, string tagName, string value, string namespaceUri)
         {
-            var xml_element = CreateElement(doc, tagName, namespaceUri);
+            XmlElement xml_element = CreateElement(doc, tagName, namespaceUri);
 
             if (!string.IsNullOrEmpty(value))
             {

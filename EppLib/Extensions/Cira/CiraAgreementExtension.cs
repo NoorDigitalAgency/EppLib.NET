@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System.Xml;
-using EppLib.Entities;
 
 namespace EppLib.Extensions.Cira
 {
@@ -22,7 +21,7 @@ namespace EppLib.Extensions.Cira
 
         public override XmlNode ToXml(XmlDocument doc)
         {
-            var root = CreateElement(doc, "cira:ciraInfo");
+            XmlElement root = CreateElement(doc, "cira:ciraInfo");
 
             if (language != null)
             {

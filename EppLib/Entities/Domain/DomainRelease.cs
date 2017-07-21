@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
 using System.Xml;
 
 namespace EppLib.Entities
@@ -31,9 +29,9 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var domainRelease = BuildCommandElement(doc, "update", commandRootElement);
+            XmlElement domainRelease = BuildCommandElement(doc, "update", commandRootElement);
             
-			var releaseNode = AddXmlElement(doc, domainRelease, "r:release", null, "http://www.nominet.org.uk/epp/xml/std-release-1.0");
+			XmlElement releaseNode = AddXmlElement(doc, domainRelease, "r:release", null, "http://www.nominet.org.uk/epp/xml/std-release-1.0");
 
             AddXmlElement(doc, releaseNode, "r:domainName", _domainName, "http://www.nominet.org.uk/epp/xml/std-release-1.0");
             AddXmlElement(doc, releaseNode, "r:registrarTag", _registrarTag, "http://www.nominet.org.uk/epp/xml/std-release-1.0");
@@ -48,7 +46,7 @@ namespace EppLib.Entities
 
         private XmlElement BuildCommandElement(XmlDocument doc, string qualifiedName, XmlElement commandRootElement)
         {
-            var elem = CreateElement(doc, qualifiedName);
+            XmlElement elem = CreateElement(doc, qualifiedName);
 
             commandRootElement.AppendChild(elem);
 

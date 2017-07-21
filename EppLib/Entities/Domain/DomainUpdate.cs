@@ -29,18 +29,18 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var domainUpdate = BuildCommandElement(doc, "update", commandRootElement);
+            XmlElement domainUpdate = BuildCommandElement(doc, "update", commandRootElement);
 
             AddXmlElement(doc, domainUpdate, "domain:name", domainName, namespaceUri);
 
-            var add_element = getAddRemoveElement(doc, ToAdd, "domain:add", namespaceUri);
+            XmlElement add_element = getAddRemoveElement(doc, ToAdd, "domain:add", namespaceUri);
 
             if (add_element != null)
             {
                 domainUpdate.AppendChild(add_element);
             }
 
-            var remove_element = getAddRemoveElement(doc, ToRemove, "domain:rem", namespaceUri);
+            XmlElement remove_element = getAddRemoveElement(doc, ToRemove, "domain:rem", namespaceUri);
 
             if (remove_element != null)
             {
@@ -49,7 +49,7 @@ namespace EppLib.Entities
 
             if (DomainChange != null)
             {
-                var change_element = doc.CreateElement("domain:chg", namespaceUri);
+                XmlElement change_element = doc.CreateElement("domain:chg", namespaceUri);
 
                 if (DomainChange.RegistrantContactId != null)
                 {
@@ -57,12 +57,12 @@ namespace EppLib.Entities
                 }
 
                 if (DomainChange.AuthInfo != null) {
-                    var authInfoElement = AddXmlElement (doc, change_element, "domain:authInfo", null, namespaceUri);
+                    XmlElement authInfoElement = AddXmlElement (doc, change_element, "domain:authInfo", null, namespaceUri);
                     AddXmlElement (doc, authInfoElement, "domain:pw", DomainChange.AuthInfo, namespaceUri);
                 } 
                 else if (DomainChange.NullAuthInfo) 
                 { 
-                  var authInfoElement = AddXmlElement (doc, change_element, "domain:authInfo", null, namespaceUri);
+                  XmlElement authInfoElement = AddXmlElement (doc, change_element, "domain:authInfo", null, namespaceUri);
                   AddXmlElement (doc, authInfoElement, "domain:null", null, namespaceUri);
                 }
 
@@ -116,9 +116,9 @@ namespace EppLib.Entities
                         add_remove_element = doc.CreateElement(tag_name, namespaceURI);
                     }
 
-                    foreach (var domain_contact in add_remove_items.DomainContacts)
+                    foreach (DomainContact domain_contact in add_remove_items.DomainContacts)
                     {
-                        var contact_element = AddXmlElement(doc, add_remove_element, "domain:contact", domain_contact.Id, namespaceURI);
+                        XmlElement contact_element = AddXmlElement(doc, add_remove_element, "domain:contact", domain_contact.Id, namespaceURI);
 
                         contact_element.SetAttribute("type", domain_contact.Type);
                     }
@@ -132,9 +132,9 @@ namespace EppLib.Entities
                         add_remove_element = doc.CreateElement(tag_name, namespaceURI);
                     }
 
-                    foreach (var status in add_remove_items.Status)
+                    foreach (Status status in add_remove_items.Status)
                     {
-                        var status_element = AddXmlElement(doc, add_remove_element, "domain:status", status.Value, namespaceURI);
+                        XmlElement status_element = AddXmlElement(doc, add_remove_element, "domain:status", status.Value, namespaceURI);
 
                         status_element.SetAttribute("s", status.Type);
 

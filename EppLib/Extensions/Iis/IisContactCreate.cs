@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Xml;
 using EppLib.Entities;
 
@@ -27,7 +26,7 @@ namespace EppLib.Extensions.Iis
 
         public override XmlDocument ToXml()
         {
-            var createExt = new IisContactCreateExtension
+            IisContactCreateExtension createExt = new IisContactCreateExtension
                                 {
                                     OrganizationNumber = OrganizationNumber,
                                     VatNumber = VatNumber

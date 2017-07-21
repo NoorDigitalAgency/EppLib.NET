@@ -37,9 +37,9 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var contact_check = BuildCommandElement(doc, "check", commandRootElement);
+            XmlElement contact_check = BuildCommandElement(doc, "check", commandRootElement);
 
-            foreach (var contactId in contactIds)
+            foreach (string contactId in contactIds)
             {
                 AddXmlElement(doc, contact_check, "contact:id", contactId, namespaceUri);
             }

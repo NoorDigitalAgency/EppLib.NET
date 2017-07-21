@@ -32,14 +32,14 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var domainRenew = BuildCommandElement(doc, "renew", commandRootElement);
+            XmlElement domainRenew = BuildCommandElement(doc, "renew", commandRootElement);
 
             AddXmlElement(doc, domainRenew, "domain:name", DomainName, namespaceUri);
             AddXmlElement(doc, domainRenew, "domain:curExpDate", DateTime.Parse(CurrentExpirationDate, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), namespaceUri);
 
             if (m_period != null)
             {
-                var period = AddXmlElement(doc, domainRenew, "domain:period", m_period.Value.ToString(CultureInfo.InvariantCulture), namespaceUri);
+                XmlElement period = AddXmlElement(doc, domainRenew, "domain:period", m_period.Value.ToString(CultureInfo.InvariantCulture), namespaceUri);
                 period.SetAttribute("unit", m_period.Unit);
             }
 

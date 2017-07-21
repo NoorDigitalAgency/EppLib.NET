@@ -19,9 +19,9 @@ namespace EppLib.Entities
     {
         public override XmlDocument ToXml()
         {
-            var doc = new XmlDocument();
-            var root = CreateDocRoot(doc);
-            var hello = CreateElement(doc,"hello");
+            XmlDocument doc = new XmlDocument();
+            XmlElement root = CreateDocRoot(doc);
+            XmlElement hello = CreateElement(doc,"hello");
             root.AppendChild(hello);
             doc.AppendChild(root);
 

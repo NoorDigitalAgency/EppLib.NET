@@ -22,21 +22,21 @@ namespace EppLib.Extensions.SecDNS
 
         public XmlNode ToXml(XmlDocument doc)
         {
-            var dataNode = doc.CreateElement("secDNS:dsData", "urn:ietf:params:xml:ns:secDNS-1.1");
+            XmlElement dataNode = doc.CreateElement("secDNS:dsData", "urn:ietf:params:xml:ns:secDNS-1.1");
 
-            var keyTagNode = doc.CreateElement("secDNS:keyTag", "urn:ietf:params:xml:ns:secDNS-1.1");
+            XmlElement keyTagNode = doc.CreateElement("secDNS:keyTag", "urn:ietf:params:xml:ns:secDNS-1.1");
             keyTagNode.InnerText = KeyTag.ToString();
             dataNode.AppendChild(keyTagNode);
 
-            var algNode = doc.CreateElement("secDNS:alg", "urn:ietf:params:xml:ns:secDNS-1.1");
+            XmlElement algNode = doc.CreateElement("secDNS:alg", "urn:ietf:params:xml:ns:secDNS-1.1");
             algNode.InnerText = ((int)Algorithm).ToString();
             dataNode.AppendChild(algNode);
 
-            var digestTypeNode = doc.CreateElement("secDNS:digestType", "urn:ietf:params:xml:ns:secDNS-1.1");
+            XmlElement digestTypeNode = doc.CreateElement("secDNS:digestType", "urn:ietf:params:xml:ns:secDNS-1.1");
             digestTypeNode.InnerText = "1";
             dataNode.AppendChild(digestTypeNode);
 
-            var digestNode = doc.CreateElement("secDNS:digest", "urn:ietf:params:xml:ns:secDNS-1.1");
+            XmlElement digestNode = doc.CreateElement("secDNS:digest", "urn:ietf:params:xml:ns:secDNS-1.1");
             digestNode.InnerText = Digest;
             dataNode.AppendChild(digestNode);
 

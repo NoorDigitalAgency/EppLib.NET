@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using EppLib.Entities;
 
@@ -21,14 +19,14 @@ namespace EppLib.Extensions.Nominet.Notifications
             base.ProcessDataNode(doc, namespaces);
 
             namespaces.AddNamespace("n", "http://www.nominet.org.uk/epp/xml/std-notifications-1.1");
-            var suspDataNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/n:suspData", namespaces);
+            XmlNode suspDataNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/n:suspData", namespaces);
 
             if (suspDataNode != null)
             {
-                var reasonNode = suspDataNode.SelectSingleNode("n:reason", namespaces);
+                XmlNode reasonNode = suspDataNode.SelectSingleNode("n:reason", namespaces);
                 SuspendedReason = reasonNode != null ? reasonNode.InnerText : null;
                 
-                var cancelDateNode = suspDataNode.SelectSingleNode("n:cancelDate", namespaces);
+                XmlNode cancelDateNode = suspDataNode.SelectSingleNode("n:cancelDate", namespaces);
                 if (cancelDateNode != null)
                 {
                     DateTime parsedDate;
@@ -38,10 +36,10 @@ namespace EppLib.Extensions.Nominet.Notifications
                     }
                 }
 
-                var domainListNode = suspDataNode.SelectSingleNode("n:domainListData", namespaces);
+                XmlNode domainListNode = suspDataNode.SelectSingleNode("n:domainListData", namespaces);
                 if (domainListNode != null)
                 {
-                    var nodes = domainListNode.SelectNodes("n:domainName", namespaces);
+                    XmlNodeList nodes = domainListNode.SelectNodes("n:domainName", namespaces);
                     if (nodes != null)
                     {
                         SuspendedDomains = new List<string>();

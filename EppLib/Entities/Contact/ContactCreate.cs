@@ -32,17 +32,17 @@ namespace EppLib.Entities
                 throw new EppException("missing contact id");
             }
 
-            var contact_create = BuildCommandElement(doc, "create", commandRootElement);
+            XmlElement contact_create = BuildCommandElement(doc, "create", commandRootElement);
 
             AddXmlElement(doc, contact_create, "contact:id", contact.Id, namespaceUri);
 
-            var xml = AddressToXml(doc, "contact:postalInfo", contact.PostalInfo);
+            XmlElement xml = AddressToXml(doc, "contact:postalInfo", contact.PostalInfo);
 
             contact_create.AppendChild(xml);
 
             if (contact.Voice != null)
             {
-                var voice = AddXmlElement(doc, contact_create, "contact:voice", contact.Voice.Value, namespaceUri);
+                XmlElement voice = AddXmlElement(doc, contact_create, "contact:voice", contact.Voice.Value, namespaceUri);
 
                 if (contact.Voice.Extension != null)
                 {
@@ -52,7 +52,7 @@ namespace EppLib.Entities
 
             if (contact.Fax != null)
             {
-                var voice = AddXmlElement(doc, contact_create, "contact:fax", contact.Fax.Value, namespaceUri);
+                XmlElement voice = AddXmlElement(doc, contact_create, "contact:fax", contact.Fax.Value, namespaceUri);
                 if (contact.Fax.Extension != null)
                 {
                     voice.SetAttribute("x", contact.Fax.Extension);
@@ -64,16 +64,16 @@ namespace EppLib.Entities
                 AddXmlElement(doc, contact_create, "contact:email", contact.Email, namespaceUri); 
             }
 
-            if (!String.IsNullOrWhiteSpace(Password))
+            if (!string.IsNullOrWhiteSpace(Password))
             {
-                var authInfo = AddXmlElement(doc, contact_create, nspace + ":authInfo", null, namespaceUri);
+                XmlElement authInfo = AddXmlElement(doc, contact_create, nspace + ":authInfo", null, namespaceUri);
                 AddXmlElement(doc, authInfo, nspace + ":pw", Password, namespaceUri);
 
             }
 
             if (contact.DiscloseFlag != null)
             {
-                var disclose = DiscloseToXml(doc, contact.DiscloseMask, (bool)contact.DiscloseFlag);
+                XmlElement disclose = DiscloseToXml(doc, contact.DiscloseMask, (bool)contact.DiscloseFlag);
                 contact_create.AppendChild(disclose);
             }
 

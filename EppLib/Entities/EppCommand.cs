@@ -44,10 +44,10 @@ namespace EppLib.Entities
 
         public override XmlDocument ToXml()
         {
-            var doc = new XmlDocument();
-            var commandRootElement = GetCommandRootElement(doc);
+            XmlDocument doc = new XmlDocument();
+            XmlElement commandRootElement = GetCommandRootElement(doc);
 
-            var cmdElement = BuildCommandElement(doc, commandRootElement);
+            XmlElement cmdElement = BuildCommandElement(doc, commandRootElement);
 
             AppendAuthInfo(doc, cmdElement);
 
@@ -58,12 +58,12 @@ namespace EppLib.Entities
 
         private void AppendAuthInfo(XmlDocument doc, XmlElement cmdElement)
         {
-            if (!String.IsNullOrWhiteSpace(Password))
+            if (!string.IsNullOrWhiteSpace(Password))
             {
                 // We may have had to insert the authInfo tag in this namespace already, in which case don't insert it again
                 if (doc.GetElementsByTagName(nspace + ":authInfo").Count == 0)
                 {
-                    var authInfo = AddXmlElement(doc, cmdElement, nspace + ":authInfo", null, namespaceUri);
+                    XmlElement authInfo = AddXmlElement(doc, cmdElement, nspace + ":authInfo", null, namespaceUri);
                     AddXmlElement(doc, authInfo, nspace + ":pw", Password, namespaceUri);
                 }
             }
@@ -72,14 +72,14 @@ namespace EppLib.Entities
         private void SetCommonAttributes(XmlElement command)
         {
             command.SetAttribute("xmlns:" + nspace, namespaceUri);
-            var xsd = command.OwnerDocument.CreateAttribute("xsi", "schemaLocation", "http://www.w3.org/2001/XMLSchema-instance");
+            XmlAttribute xsd = command.OwnerDocument.CreateAttribute("xsi", "schemaLocation", "http://www.w3.org/2001/XMLSchema-instance");
             xsd.Value = schemaLocation;
             command.Attributes.Append(xsd);
         }
 
         protected XmlElement BuildCommandElement(XmlDocument doc, string qualifiedName, XmlElement commandRootElement, string query = null)
         {
-            var command = GetCommand(doc, qualifiedName, commandRootElement, query);
+            XmlElement command = GetCommand(doc, qualifiedName, commandRootElement, query);
 
             if (Extensions != null)
             {
@@ -91,14 +91,14 @@ namespace EppLib.Entities
 
         private XmlElement GetCommand(XmlDocument doc, string qualifiedName, XmlElement commandRootElement, string query = null)
         {
-            var elem = CreateElement(doc, qualifiedName);
+            XmlElement elem = CreateElement(doc, qualifiedName);
 
             if (query != null)
             {
                 elem.SetAttribute("op", query);
             }
 
-            var command = CreateElement(doc, nspace + ":" + qualifiedName);
+            XmlElement command = CreateElement(doc, nspace + ":" + qualifiedName);
 
             SetCommonAttributes(command);
 
@@ -111,11 +111,11 @@ namespace EppLib.Entities
 
         protected static XmlElement GetCommandRootElement(XmlDocument doc)
         {
-            var root = CreateDocRoot(doc);
+            XmlElement root = CreateDocRoot(doc);
 
             doc.AppendChild(root);
 
-            var command = CreateElement(doc, "command");
+            XmlElement command = CreateElement(doc, "command");
 
             root.AppendChild(command);
 
@@ -124,9 +124,9 @@ namespace EppLib.Entities
 
         protected void AppendTRID(XmlDocument doc, XmlNode command)
         {
-            if (String.IsNullOrWhiteSpace(TransactionId)) return;
+            if (string.IsNullOrWhiteSpace(TransactionId)) return;
 
-            var clTRIDElement = CreateElement(doc, "clTRID");
+            XmlElement clTRIDElement = CreateElement(doc, "clTRID");
 
             clTRIDElement.InnerText = TransactionId;
 

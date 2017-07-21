@@ -29,7 +29,7 @@ namespace EppLib.Entities
 
         public DomainCheckResult(XmlNode child, XmlNamespaceManager namespaces)
         {
-            var nameNode = child.SelectSingleNode("domain:name", namespaces);
+            XmlNode nameNode = child.SelectSingleNode("domain:name", namespaces);
 
             if (nameNode != null)
             {
@@ -37,17 +37,17 @@ namespace EppLib.Entities
 
                 if (nameNode.Attributes != null)
                 {
-                    var xmlAttribute = nameNode.Attributes["avail"];
+                    XmlAttribute xmlAttribute = nameNode.Attributes["avail"];
 
                     if (xmlAttribute != null)
                     {
-                        var attributeValue = xmlAttribute.Value.ToLower(CultureInfo.InvariantCulture);
+                        string attributeValue = xmlAttribute.Value.ToLower(CultureInfo.InvariantCulture);
                         Available = attributeValue.Equals("true") || attributeValue.Equals("1");
                     }
                 }
             }
 
-            var reasonNode = child.SelectSingleNode("domain:reason", namespaces);
+            XmlNode reasonNode = child.SelectSingleNode("domain:reason", namespaces);
 
             if (reasonNode != null)
             {

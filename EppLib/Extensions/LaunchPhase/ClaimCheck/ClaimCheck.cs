@@ -32,9 +32,9 @@ namespace EppLib.Extensions.LaunchPhase.ClaimCheck
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var claimCheck = BuildCommandElement(doc, "check", commandRootElement);
+            XmlElement claimCheck = BuildCommandElement(doc, "check", commandRootElement);
 
-            foreach (var domain in domains)
+            foreach (string domain in domains)
             {
                 AddXmlElement(doc, claimCheck, "domain:name", domain, namespaceUri);
             }

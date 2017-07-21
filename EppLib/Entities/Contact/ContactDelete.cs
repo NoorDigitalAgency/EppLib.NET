@@ -26,7 +26,7 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var contact_delete = BuildCommandElement(doc, "delete", commandRootElement);
+            XmlElement contact_delete = BuildCommandElement(doc, "delete", commandRootElement);
 
             AddXmlElement(doc, contact_delete, "contact:id", m_id, namespaceUri);
 

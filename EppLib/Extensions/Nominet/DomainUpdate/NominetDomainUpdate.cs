@@ -19,7 +19,7 @@ namespace EppLib.Extensions.Nominet.DomainUpdate
 
 		public override XmlDocument ToXml()
 		{
-			var updateExt = new NominetDomainUpdateExtension
+			NominetDomainUpdateExtension updateExt = new NominetDomainUpdateExtension
 			                	{
 			                		AutoBill = AutoBill,
 			                		FirstBill = FirstBill,

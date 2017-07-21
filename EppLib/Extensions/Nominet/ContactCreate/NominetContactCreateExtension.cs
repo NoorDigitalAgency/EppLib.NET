@@ -11,7 +11,7 @@ namespace EppLib.Extensions.Nominet.ContactCreate
 
 		public override XmlNode ToXml(XmlDocument doc)
 		{
-			var root = CreateElement(doc, "contact-nom-ext:create");
+			XmlElement root = CreateElement(doc, "contact-nom-ext:create");
 
 			if (TradeName != null)
 			{

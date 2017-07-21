@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
 using System.Xml;
 
 namespace EppLib.Extensions.Iis
@@ -26,7 +24,7 @@ namespace EppLib.Extensions.Iis
 
         public override XmlDocument ToXml()
         {
-            var updateExt = new IisDomainUpdateExtension
+            IisDomainUpdateExtension updateExt = new IisDomainUpdateExtension
                                 {
                                     ClientDelete = ClientDelete
                                 };

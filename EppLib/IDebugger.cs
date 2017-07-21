@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EppLib
+﻿namespace EppLib
 {
     public interface IDebugger
     {

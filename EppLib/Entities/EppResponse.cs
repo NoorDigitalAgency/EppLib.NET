@@ -31,15 +31,15 @@ namespace EppLib.Entities
 
         private void FromXmlString(byte[] bytes)
         {
-            var doc = new XmlDocument();
+            XmlDocument doc = new XmlDocument();
 
-            var namespaces = new XmlNamespaceManager(doc.NameTable);
+            XmlNamespaceManager namespaces = new XmlNamespaceManager(doc.NameTable);
 
             namespaces.AddNamespace("ns", "urn:ietf:params:xml:ns:epp-1.0");
 
             doc.Load(new MemoryStream(bytes));
 
-            var resultNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:result", namespaces);
+            XmlNode resultNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:result", namespaces);
 
             if (resultNode != null)
             {
@@ -48,7 +48,7 @@ namespace EppLib.Entities
 
             ProcessDataNode(doc, namespaces);
 
-            var extension = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension", namespaces);
+            XmlNode extension = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension", namespaces);
 
             if (extension != null)
             {
@@ -74,25 +74,25 @@ namespace EppLib.Entities
         {
             if (resultNode.Attributes != null) Code = resultNode.Attributes["code"].Value;
 
-            var msgNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:result/ns:msg", namespaces);
+            XmlNode msgNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:result/ns:msg", namespaces);
 
             if (msgNode != null) { Message = msgNode.InnerText; }
 
-            var extValueNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:result/ns:extValue", namespaces);
+            XmlNode extValueNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:result/ns:extValue", namespaces);
 
             if (extValueNode != null)
             {
-                var valueNode = extValueNode.SelectSingleNode("ns:value", namespaces);
+                XmlNode valueNode = extValueNode.SelectSingleNode("ns:value", namespaces);
                 if (valueNode != null) ExtValue = valueNode.InnerText;
 
-                var reasonNode = extValueNode.SelectSingleNode("ns:reason", namespaces);
+                XmlNode reasonNode = extValueNode.SelectSingleNode("ns:reason", namespaces);
                 if (reasonNode != null) Reason = reasonNode.InnerText;
             }
         }
 
         private void ProcessTransactionIdNode(XmlDocument doc, XmlNamespaceManager namespaces)
         {
-            var node = doc.SelectSingleNode("/ns:epp/ns:response/ns:trID/ns:clTRID", namespaces);
+            XmlNode node = doc.SelectSingleNode("/ns:epp/ns:response/ns:trID/ns:clTRID", namespaces);
             if (node != null) ClientTransactionId = node.InnerText;
 
             node = doc.SelectSingleNode("/ns:epp/ns:response/ns:trID/ns:svTRID", namespaces);

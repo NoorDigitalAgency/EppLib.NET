@@ -20,17 +20,17 @@ namespace EppLib.Extensions.LaunchPhase.ClaimCheck
             if (node == null) throw new ArgumentNullException(nameof(node));
 
             // name node
-            var nameNode = node.SelectSingleNode("launch:name", namespaces);
+            XmlNode nameNode = node.SelectSingleNode("launch:name", namespaces);
             if (nameNode != null)
             {
                 Name = nameNode.InnerText;
 
-                var existsValue = nameNode.Attributes?["exists"]?.Value?.ToLower(CultureInfo.InvariantCulture);
+                string existsValue = nameNode.Attributes?["exists"]?.Value?.ToLower(CultureInfo.InvariantCulture);
                 ClaimExists = "1".Equals(existsValue) || "true".Equals(existsValue);
             }
 
             // claim key nodes
-            var claimKeys = node.SelectNodes("launch:claimKey", namespaces);
+            XmlNodeList claimKeys = node.SelectNodes("launch:claimKey", namespaces);
             foreach (XmlNode claimKey in claimKeys)
             {
                 ClaimKeys.Add(new ClaimKey(claimKey));

@@ -24,7 +24,7 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var hostInfo = BuildCommandElement(doc, "delete", commandRootElement);
+            XmlElement hostInfo = BuildCommandElement(doc, "delete", commandRootElement);
 
             AddXmlElement(doc, hostInfo, "host:name", HostName, namespaceUri);
 

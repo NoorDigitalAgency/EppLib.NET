@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Xml;
 
 namespace EppLib.Entities
@@ -25,13 +25,13 @@ namespace EppLib.Entities
         
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var hostCreate = BuildCommandElement(doc, "create", commandRootElement);
+            XmlElement hostCreate = BuildCommandElement(doc, "create", commandRootElement);
 
             AddXmlElement(doc, hostCreate, "host:name", Host.HostName, namespaceUri);
 
-            foreach (var address in Host.Addresses)
+            foreach (HostAddress address in Host.Addresses)
             {
-                var node = AddXmlElement(doc, hostCreate, "host:addr", address.IPAddress, namespaceUri);
+                XmlElement node = AddXmlElement(doc, hostCreate, "host:addr", address.IPAddress, namespaceUri);
 
                 node.SetAttribute("ip", address.IPVersion);
             }

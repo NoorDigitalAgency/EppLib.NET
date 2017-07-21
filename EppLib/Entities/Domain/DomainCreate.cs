@@ -47,13 +47,13 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var domainCreate = BuildCommandElement(doc, "create", commandRootElement);
+            XmlElement domainCreate = BuildCommandElement(doc, "create", commandRootElement);
 
             AddXmlElement(doc, domainCreate, "domain:name", DomainName, namespaceUri);
 
             if (Period != null)
             {
-                var period = AddXmlElement(doc, domainCreate, "domain:period", Period.Value.ToString(CultureInfo.InvariantCulture), namespaceUri);
+                XmlElement period = AddXmlElement(doc, domainCreate, "domain:period", Period.Value.ToString(CultureInfo.InvariantCulture), namespaceUri);
 
                 period.SetAttribute("unit", Period.Unit);
             }
@@ -68,9 +68,9 @@ namespace EppLib.Entities
                 AddXmlElement(doc, domainCreate, "domain:registrant", RegistrantContactId, namespaceUri);
             }
             
-            foreach (var contact in DomainContacts)
+            foreach (DomainContact contact in DomainContacts)
             {
-                var contact_element = AddXmlElement(doc, domainCreate, "domain:contact", contact.Id,namespaceUri);
+                XmlElement contact_element = AddXmlElement(doc, domainCreate, "domain:contact", contact.Id,namespaceUri);
 
                 contact_element.SetAttribute("type", contact.Type);
             }

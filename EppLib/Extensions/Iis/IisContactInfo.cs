@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Xml;
 using EppLib.Entities;
 
@@ -29,7 +28,7 @@ namespace EppLib.Extensions.Iis
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var contact_info = BuildCommandElement(doc, "info", commandRootElement);
+            XmlElement contact_info = BuildCommandElement(doc, "info", commandRootElement);
 
             AddXmlElement(doc, contact_info, "contact:id", _id, namespaceUri);
 

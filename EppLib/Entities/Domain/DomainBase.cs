@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -27,9 +26,9 @@ namespace EppLib.Entities
 
         protected XmlNode CreateNameServerElement(XmlDocument doc, IEnumerable<string> nameServers)
         {
-            var nameServerElement = doc.CreateElement("domain:ns", namespaceUri);
+            XmlElement nameServerElement = doc.CreateElement("domain:ns", namespaceUri);
 
-            foreach (var serverName in nameServers)
+            foreach (string serverName in nameServers)
             {
                 AddXmlElement(doc, nameServerElement, "domain:hostObj", serverName,namespaceUri);
             }

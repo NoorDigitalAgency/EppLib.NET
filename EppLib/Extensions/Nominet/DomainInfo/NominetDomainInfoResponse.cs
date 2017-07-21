@@ -40,74 +40,74 @@ namespace EppLib.Extensions.Nominet.DomainInfo
 			namespaces.AddNamespace("domain", "urn:ietf:params:xml:ns:domain-1.0");
 			namespaces.AddNamespace("domain-nom-ext", "http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2");
 
-			var children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/domain-nom-ext:infData", namespaces);
+			XmlNode children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/domain-nom-ext:infData", namespaces);
 			
 			if (children != null)
 			{
-				var autoBillNode = children.SelectSingleNode("domain-nom-ext:auto-bill", namespaces);
+				XmlNode autoBillNode = children.SelectSingleNode("domain-nom-ext:auto-bill", namespaces);
 
 				if (autoBillNode != null)
 				{
 					_nomDomain.AutoBill = autoBillNode.InnerText;
 				}
 
-				var firstBillNode = children.SelectSingleNode("domain-nom-ext:first-bill", namespaces);
+				XmlNode firstBillNode = children.SelectSingleNode("domain-nom-ext:first-bill", namespaces);
 
 				if (firstBillNode != null)
 				{
 					_nomDomain.FirstBill = firstBillNode.InnerText;
 				}
 
-				var recurBillNode = children.SelectSingleNode("domain-nom-ext:recur-bill", namespaces);
+				XmlNode recurBillNode = children.SelectSingleNode("domain-nom-ext:recur-bill", namespaces);
 
 				if (recurBillNode != null)
 				{
 					_nomDomain.RecurBill = recurBillNode.InnerText;
 				}
 
-				var nextBillNode = children.SelectSingleNode("domain-nom-ext:next-bill", namespaces);
+				XmlNode nextBillNode = children.SelectSingleNode("domain-nom-ext:next-bill", namespaces);
 
 				if (nextBillNode != null)
 				{
 					_nomDomain.FirstBill = nextBillNode.InnerText;
 				}
 
-				var resellerNode = children.SelectSingleNode("domain-nom-ext:reseller", namespaces);
+				XmlNode resellerNode = children.SelectSingleNode("domain-nom-ext:reseller", namespaces);
 
 				if (resellerNode != null)
 				{
 					_nomDomain.Reseller = resellerNode.InnerText;
 				}
 
-				var nextPeriodNode = children.SelectSingleNode("domain-nom-ext:next-period", namespaces);
+				XmlNode nextPeriodNode = children.SelectSingleNode("domain-nom-ext:next-period", namespaces);
 
 				if (nextPeriodNode != null)
 				{
 					_nomDomain.NextPeriod = nextPeriodNode.InnerText;
 				}
 
-				var autoPeriodNode = children.SelectSingleNode("domain-nom-ext:auto-period", namespaces);
+				XmlNode autoPeriodNode = children.SelectSingleNode("domain-nom-ext:auto-period", namespaces);
 
 				if (autoPeriodNode != null)
 				{
 					_nomDomain.AutoPeriod = autoPeriodNode.InnerText;
 				}
 
-				var renewNotReqNode = children.SelectSingleNode("domain-nom-ext:renew-not-required", namespaces);
+				XmlNode renewNotReqNode = children.SelectSingleNode("domain-nom-ext:renew-not-required", namespaces);
 
 				if (renewNotReqNode != null)
 				{
 					_nomDomain.RenewNotRequired = renewNotReqNode.InnerText;
 				}
 
-				var regStatusNode = children.SelectSingleNode("domain-nom-ext:reg-status", namespaces);
+				XmlNode regStatusNode = children.SelectSingleNode("domain-nom-ext:reg-status", namespaces);
 
 				if (regStatusNode != null)
 				{
 					_nomDomain.RegStatus = regStatusNode.InnerText;
 				}
 
-				var noteNodes = children.SelectNodes("domain-nom-ext:notes", namespaces);
+				XmlNodeList noteNodes = children.SelectNodes("domain-nom-ext:notes", namespaces);
 
 				if (noteNodes != null)
 				{

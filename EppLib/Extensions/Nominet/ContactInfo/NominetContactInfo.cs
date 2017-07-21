@@ -27,7 +27,7 @@ namespace EppLib.Extensions.Nominet.ContactInfo
 
 		protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
 		{
-			var contact_info = BuildCommandElement(doc, "info", commandRootElement);
+			XmlElement contact_info = BuildCommandElement(doc, "info", commandRootElement);
 
 			AddXmlElement(doc, contact_info, "contact:id", m_id, namespaceUri);
 

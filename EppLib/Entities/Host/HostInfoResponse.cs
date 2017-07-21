@@ -25,27 +25,27 @@ namespace EppLib.Entities
         {
             namespaces.AddNamespace("host", "urn:ietf:params:xml:ns:host-1.0");
 
-            var children = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/host:infData", namespaces);
+            XmlNode children = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData/host:infData", namespaces);
 
             Host = new Host();
 
             if (children != null)
             {
-                var nameNode = children.SelectSingleNode("host:name", namespaces);
+                XmlNode nameNode = children.SelectSingleNode("host:name", namespaces);
 
                 if (nameNode != null)
                 {
                     Host.HostName = nameNode.InnerText;
                 }
 
-                var roidNode = children.SelectSingleNode("host:roid", namespaces);
+                XmlNode roidNode = children.SelectSingleNode("host:roid", namespaces);
 
                 if (roidNode != null)
                 {
                     Host.Roid = roidNode.InnerText;
                 }
 
-                var statusNodes = children.SelectNodes("host:status", namespaces);
+                XmlNodeList statusNodes = children.SelectNodes("host:status", namespaces);
 
                 if (statusNodes != null)
                 {
@@ -59,13 +59,13 @@ namespace EppLib.Entities
                     
                 }
 
-                var addresses = children.SelectNodes("host:addr", namespaces);
+                XmlNodeList addresses = children.SelectNodes("host:addr", namespaces);
 
                 if (addresses != null)
                 {
                     foreach (XmlNode address in addresses)
                     {
-                        var hostAddress = new HostAddress {IPAddress = address.InnerText};
+                        HostAddress hostAddress = new HostAddress {IPAddress = address.InnerText};
 
                         if (address.Attributes != null)
                         {
@@ -76,42 +76,42 @@ namespace EppLib.Entities
                     }
                 }
 
-                var clIdNode = children.SelectSingleNode("host:clID", namespaces);
+                XmlNode clIdNode = children.SelectSingleNode("host:clID", namespaces);
 
                 if (clIdNode != null)
                 {
                     Host.ClId = clIdNode.InnerText;
                 }
 
-                var crIdNode = children.SelectSingleNode("host:crID", namespaces);
+                XmlNode crIdNode = children.SelectSingleNode("host:crID", namespaces);
 
                 if (crIdNode != null)
                 {
                     Host.CrId = crIdNode.InnerText;
                 }
 
-                var crDateNode = children.SelectSingleNode("host:crDate", namespaces);
+                XmlNode crDateNode = children.SelectSingleNode("host:crDate", namespaces);
 
                 if (crDateNode != null)
                 {
                     Host.CrDate = crDateNode.InnerText;
                 }
 
-                var upIdNode = children.SelectSingleNode("host:upID", namespaces);
+                XmlNode upIdNode = children.SelectSingleNode("host:upID", namespaces);
 
                 if (upIdNode != null)
                 {
                     Host.UpId = upIdNode.InnerText;
                 }
 
-                var upDateNode = children.SelectSingleNode("host:upDate", namespaces);
+                XmlNode upDateNode = children.SelectSingleNode("host:upDate", namespaces);
 
                 if (upDateNode != null)
                 {
                     Host.UpDate = upDateNode.InnerText;
                 }
 
-                var trDateNode = children.SelectSingleNode("host:trDate", namespaces);
+                XmlNode trDateNode = children.SelectSingleNode("host:trDate", namespaces);
 
                 if (trDateNode != null)
                 {

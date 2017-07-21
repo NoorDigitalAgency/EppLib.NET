@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml;
 using EppLib.Entities;
 
@@ -23,7 +20,7 @@ namespace EppLib.Extensions.Nominet.DomainCheck
 
         public override XmlDocument ToXml()
         {
-            var nominetExtension = new NominetDomainCheckExtension
+            NominetDomainCheckExtension nominetExtension = new NominetDomainCheckExtension
             {
                 Email = Email,
                 PostalInfo = PostalInfo,

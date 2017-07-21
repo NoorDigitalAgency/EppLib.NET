@@ -32,9 +32,9 @@ namespace EppLib.Entities
             return doc.CreateElement(qualifiedName, namespaceURI);
         }
 
-        protected XmlElement AddXmlElement(XmlDocument doc, XmlElement containingElement, String tagName, String value)
+        protected XmlElement AddXmlElement(XmlDocument doc, XmlElement containingElement, string tagName, string value)
         {
-            var xml_element = CreateElement(doc, tagName);
+            XmlElement xml_element = CreateElement(doc, tagName);
 
             if (!string.IsNullOrEmpty(value))
             {
@@ -44,9 +44,9 @@ namespace EppLib.Entities
             return xml_element;
         }
 
-        protected XmlElement AddXmlElement(XmlDocument doc, XmlElement containingElement, String tagName, String value, string namespaceUri)
+        protected XmlElement AddXmlElement(XmlDocument doc, XmlElement containingElement, string tagName, string value, string namespaceUri)
         {
-            var xml_element = CreateElement(doc, tagName, namespaceUri);
+            XmlElement xml_element = CreateElement(doc, tagName, namespaceUri);
 
             if (!string.IsNullOrEmpty(value))
             {

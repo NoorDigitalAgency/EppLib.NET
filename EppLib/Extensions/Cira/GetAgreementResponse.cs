@@ -31,25 +31,25 @@ namespace EppLib.Extensions.Cira
         {
             namespaces.AddNamespace("cira", "urn:ietf:params:xml:ns:cira-1.0");
 
-            var children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/cira:ciraInfo", namespaces);
+            XmlNode children = doc.SelectSingleNode("/ns:epp/ns:response/ns:extension/cira:ciraInfo", namespaces);
 
             if (children != null)
             {
-                var crLanguage = children.SelectSingleNode("cira:language", namespaces);
+                XmlNode crLanguage = children.SelectSingleNode("cira:language", namespaces);
 
                 if (crLanguage != null)
                 {
                     Language = crLanguage.InnerText;
                 }
 
-                var crCiraAgreementVersion = children.SelectSingleNode("cira:ciraAgreementVersion", namespaces);
+                XmlNode crCiraAgreementVersion = children.SelectSingleNode("cira:ciraAgreementVersion", namespaces);
 
                 if (crCiraAgreementVersion != null)
                 {
                     AgreementVersion = crCiraAgreementVersion.InnerText;
                 }
 
-                var crAgreement = children.SelectSingleNode("cira:ciraAgreement", namespaces);
+                XmlNode crAgreement = children.SelectSingleNode("cira:ciraAgreement", namespaces);
 
                 if (crAgreement != null)
                 {

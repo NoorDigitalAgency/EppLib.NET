@@ -16,7 +16,7 @@ namespace EppLib.Extensions.Nominet.DomainCreate
 
 		public override XmlNode ToXml(XmlDocument doc)
         {
-			var root = CreateElement(doc, "domain-nom-ext:create");
+			XmlElement root = CreateElement(doc, "domain-nom-ext:create");
             
             if (FirstBill != null)
             {

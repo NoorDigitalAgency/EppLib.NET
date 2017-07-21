@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Xml;
 
 namespace EppLib.Extensions.Iis
@@ -23,7 +22,7 @@ namespace EppLib.Extensions.Iis
 
         public override XmlNode ToXml(XmlDocument doc)
         {
-            var root = CreateElement(doc, "iis:update");
+            XmlElement root = CreateElement(doc, "iis:update");
 
             if (ClientDelete != null)
             {

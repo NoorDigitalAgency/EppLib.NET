@@ -38,18 +38,18 @@ namespace EppLib.Entities
                 throw new EppException("missing contact id");
             }
 
-            var contact_update = BuildCommandElement(doc, "update", commandRootElement);
+            XmlElement contact_update = BuildCommandElement(doc, "update", commandRootElement);
 
             AddXmlElement(doc, contact_update, "contact:id", ContactId, namespaceUri);
 
-            var add_element = getAddRemoveElement(doc, ToAdd);
+            XmlElement add_element = getAddRemoveElement(doc, ToAdd);
 
             if (add_element != null)
             {
                 contact_update.AppendChild(add_element);
             }
 
-            var remove_element = getAddRemoveElement(doc, ToRemove);
+            XmlElement remove_element = getAddRemoveElement(doc, ToRemove);
 
             if (remove_element != null)
             {
@@ -58,19 +58,19 @@ namespace EppLib.Entities
 
             if (ContactChange != null)
             {
-                var change_element = doc.CreateElement("contact:chg", namespaceUri);
+                XmlElement change_element = doc.CreateElement("contact:chg", namespaceUri);
 
                 if (ContactChange.PostalInfo != null)
                 {
-                    var xml = AddressToXml(doc, "contact:postalInfo", ContactChange.PostalInfo);
+                    XmlElement xml = AddressToXml(doc, "contact:postalInfo", ContactChange.PostalInfo);
                     change_element.AppendChild(xml);
                 }
 
                 if (ContactChange.Voice != null)
                 {
-                    var voice = AddXmlElement(doc, change_element, "contact:voice", ContactChange.Voice.Value, namespaceUri);
+                    XmlElement voice = AddXmlElement(doc, change_element, "contact:voice", ContactChange.Voice.Value, namespaceUri);
 
-                    if (!String.IsNullOrEmpty(ContactChange.Voice.Extension))
+                    if (!string.IsNullOrEmpty(ContactChange.Voice.Extension))
                     {
                         voice.SetAttribute("x", ContactChange.Voice.Extension);
                     }
@@ -78,9 +78,9 @@ namespace EppLib.Entities
 
                 if (ContactChange.Fax != null)
                 {
-                    var voice = AddXmlElement(doc, change_element, "contact:fax", ContactChange.Fax.Value, namespaceUri);
+                    XmlElement voice = AddXmlElement(doc, change_element, "contact:fax", ContactChange.Fax.Value, namespaceUri);
 
-                    if (!String.IsNullOrEmpty(ContactChange.Fax.Extension))
+                    if (!string.IsNullOrEmpty(ContactChange.Fax.Extension))
                     {
                         voice.SetAttribute("x", ContactChange.Fax.Extension);
                     }
@@ -88,7 +88,7 @@ namespace EppLib.Entities
 
                 if (ContactChange.DiscloseFlag != null)
                 {
-                    var disclose = DiscloseToXml(doc, ContactChange.DiscloseMask, (bool)ContactChange.DiscloseFlag);
+                    XmlElement disclose = DiscloseToXml(doc, ContactChange.DiscloseMask, (bool)ContactChange.DiscloseFlag);
                     change_element.AppendChild(disclose);
                 }
                     
@@ -112,10 +112,10 @@ namespace EppLib.Entities
                 if (addRemoveItems.Status != null &&
                      addRemoveItems.Status.Count > 0)
                 {
-                    foreach (var status in addRemoveItems.Status)
+                    foreach (Status status in addRemoveItems.Status)
                     {
 
-                        var status_element = AddXmlElement(doc, add_remove_element, "contact:status", status.Value);
+                        XmlElement status_element = AddXmlElement(doc, add_remove_element, "contact:status", status.Value);
 
                         status_element.SetAttribute("s", status.Type);
 

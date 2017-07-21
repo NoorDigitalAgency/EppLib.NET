@@ -27,7 +27,7 @@ namespace EppLib.Entities
 
         protected override void ProcessDataNode(XmlDocument doc, XmlNamespaceManager namespaces)
         {
-            var messageNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:msgQ", namespaces);
+            XmlNode messageNode = doc.SelectSingleNode("/ns:epp/ns:response/ns:msgQ", namespaces);
 
             if (messageNode != null)
             {
@@ -37,14 +37,14 @@ namespace EppLib.Entities
                     Count = Convert.ToInt32(messageNode.Attributes["count"].Value,CultureInfo.InvariantCulture);
                 }
 
-                var qDateNode = messageNode.SelectSingleNode("ns:qDate", namespaces);
+                XmlNode qDateNode = messageNode.SelectSingleNode("ns:qDate", namespaces);
 
                 if(qDateNode!=null)
                 {
                     QDate = qDateNode.InnerText;
                 }
 
-                var msgNode = messageNode.SelectSingleNode("ns:msg", namespaces);
+                XmlNode msgNode = messageNode.SelectSingleNode("ns:msg", namespaces);
 
                 if (msgNode != null)
                 {
@@ -58,21 +58,21 @@ namespace EppLib.Entities
                 
             }
 
-            var resData = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData", namespaces);
+            XmlNode resData = doc.SelectSingleNode("/ns:epp/ns:response/ns:resData", namespaces);
 
             namespaces.AddNamespace("poll","urn:ietf:params:xml:ns:poll-1.0");
 
             if (resData != null)
             {
             	ResultData = resData.InnerXml;
-                var msgIDNode = resData.SelectSingleNode("poll:msgID", namespaces);
+                XmlNode msgIDNode = resData.SelectSingleNode("poll:msgID", namespaces);
 
                 if (msgIDNode != null)
                 {
                     MsgId = msgIDNode.InnerText;
                 }
 
-                var domainNameNode = resData.SelectSingleNode("poll:domainName", namespaces);
+                XmlNode domainNameNode = resData.SelectSingleNode("poll:domainName", namespaces);
 
                 if (domainNameNode != null)
                 {

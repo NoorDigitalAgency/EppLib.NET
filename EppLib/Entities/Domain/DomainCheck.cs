@@ -32,9 +32,9 @@ namespace EppLib.Entities
 
         protected override XmlElement BuildCommandElement(XmlDocument doc, XmlElement commandRootElement)
         {
-            var domainCheck = BuildCommandElement(doc, "check", commandRootElement);
+            XmlElement domainCheck = BuildCommandElement(doc, "check", commandRootElement);
 
-            foreach (var domain in domains)
+            foreach (string domain in domains)
             {
                 AddXmlElement(doc, domainCheck, "domain:name", domain, namespaceUri);
             }

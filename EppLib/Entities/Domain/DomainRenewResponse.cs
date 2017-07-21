@@ -32,11 +32,11 @@ namespace EppLib.Entities
         protected override void ProcessDataNode(XmlDocument doc, XmlNamespaceManager namespaces)
         {
             namespaces.AddNamespace("domain", "urn:ietf:params:xml:ns:domain-1.0");
-            var renData = doc.SelectSingleNode("//domain:renData", namespaces);
+            XmlNode renData = doc.SelectSingleNode("//domain:renData", namespaces);
 
             if (renData != null)
             {
-                var exDateNode = renData.SelectSingleNode("domain:exDate", namespaces);
+                XmlNode exDateNode = renData.SelectSingleNode("domain:exDate", namespaces);
 
                 if (exDateNode != null)
                 {
