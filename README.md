@@ -1,3 +1,7 @@
+# This is the .NET Core 2.0 port of https://github.com/CodeMakerInc/EppLib.NET
+
+Original README.md Content:
+
 # EppLib.NET 
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dxtxp3tjjgne87ar)](https://ci.appveyor.com/project/AdemarGonzalez/epplib-net)
