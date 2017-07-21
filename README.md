@@ -1,6 +1,6 @@
 # This is the .NET Core 2.0 port of https://github.com/CodeMakerInc/EppLib.NET
 
-Original README.md Content:
+## Following is the original README.md Content:
 
 # EppLib.NET 
 
