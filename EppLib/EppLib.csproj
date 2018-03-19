@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>epplib.pfx</AssemblyOriginatorKeyFile>
     <Company>Code Maker Inc.</Company>
@@ -15,6 +15,10 @@
     <RepositoryUrl>https://github.com/CodeMakerInc/EppLib.NET</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.Platforms" Version="2.1.0-preview1-26216-02" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="epplib.pfx" />
