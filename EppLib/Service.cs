@@ -34,7 +34,7 @@ namespace EppLib
 		/// <summary>
 		/// Connects to the registry end point
 		/// </summary>
-        public void Connect(SslProtocols sslProtocols = SslProtocols.Tls)
+        public void Connect(SslProtocols sslProtocols = SslProtocols.Tls12)
 		{
             transport.Connect(sslProtocols);
 			transport.Read();
