@@ -11,20 +11,33 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
+using EppLib.Extensions.SecDNS;
 
 namespace EppLib.Entities
 {
     public class DomainInfoResponse : EppResponse
     {
         protected Domain _domain = new Domain();
+
         public virtual Domain Domain
         {
             get { return _domain; }
         }
 
-        public DomainInfoResponse(string xml) : base(xml) { }
-        public DomainInfoResponse(byte[] bytes) : base(bytes) { }
+        public IList<SecDNSData> SecDnsList { get; private set; }
+
+        public DomainInfoResponse(string xml) : base(xml)
+        {
+        }
+
+        public DomainInfoResponse(byte[] bytes) : base(bytes)
+        {
+        }
 
         protected override void ProcessDataNode(XmlDocument doc, XmlNamespaceManager namespaces)
         {
@@ -199,7 +212,43 @@ namespace EppLib.Entities
                     Domain.Password = passwordNode.InnerText;
                 }
             }
-
         }
+
+        protected override void ProcessExtensionNode(XmlDocument doc, XmlNamespaceManager namespaces)
+        {
+            base.ProcessExtensionNode(doc, namespaces);
+            const string prefix = "sec";
+
+            namespaces.AddNamespace(prefix, "urn:ietf:params:xml:ns:secDNS-1.1");
+            const string dsDataSelector = "/ns:epp/ns:response/ns:extension/sec:infData/sec:dsData";
+
+            var dsDataNodes = doc.SelectNodes(dsDataSelector, namespaces)?.Cast<XmlElement>().ToList();
+            if (dsDataNodes != null && dsDataNodes.Any())
+            {
+                SecDnsList = new List<SecDNSData>();
+                foreach (XmlElement sourceDsDataNode in dsDataNodes)
+                {
+                    var keyTag = sourceDsDataNode.SelectSingleNode($"{prefix}:keyTag", namespaces);
+                    var alg = sourceDsDataNode.SelectSingleNode($"{prefix}:alg", namespaces);
+                    var digestType = sourceDsDataNode.SelectSingleNode($"{prefix}:digestType", namespaces);
+                    var digest = sourceDsDataNode.SelectSingleNode($"{prefix}:digest", namespaces);
+                    if (keyTag != null && 
+                        alg != null && 
+                        digestType != null && 
+                        digest != null)
+                    {
+                        var secDnsData = new SecDNSData
+                        {
+                            KeyTag = ushort.Parse(keyTag.InnerText),
+                            Algorithm = (SecDNSAlgorithm)Enum.Parse(typeof(SecDNSAlgorithm), alg.InnerText),
+                            DigestType = (SecDNSDigestType)Enum.Parse(typeof(SecDNSDigestType), digestType.InnerText),
+                            Digest = digest.InnerText
+                        };
+                        SecDnsList.Add(secDnsData);
+                    }
+                }
+            }
+        }
+
     }
 }
