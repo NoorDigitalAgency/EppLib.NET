@@ -2,22 +2,14 @@
 
 namespace EppLib.Extensions.SecDNS
 {
-    public enum SecDNSAlgorithm
-    {
-        RSAMD5 = 1,
-        DH = 2,
-        DSA = 3,
-        ECC = 4,
-        RSASHA1 = 5,
-        INDIRECT = 252,
-        PRIVATEDNS = 253,
-        PRIVATEOID = 254
-    }
-
     public class SecDNSData
     {
-        public short KeyTag { get; set; }
+        /// <summary>
+        /// Base on https://datatracker.ietf.org/doc/html/rfc4034#section-5.1.1
+        /// </summary>
+        public ushort KeyTag { get; set; }
         public SecDNSAlgorithm Algorithm { get; set; }
+        public SecDNSDigestType DigestType { get; set; }
         public string Digest { get; set; }
 
         public XmlNode ToXml(XmlDocument doc)
@@ -33,7 +25,7 @@ namespace EppLib.Extensions.SecDNS
             dataNode.AppendChild(algNode);
 
             XmlElement digestTypeNode = doc.CreateElement("secDNS:digestType", "urn:ietf:params:xml:ns:secDNS-1.1");
-            digestTypeNode.InnerText = "1";
+            digestTypeNode.InnerText = ((int)DigestType).ToString();
             dataNode.AppendChild(digestTypeNode);
 
             XmlElement digestNode = doc.CreateElement("secDNS:digest", "urn:ietf:params:xml:ns:secDNS-1.1");
