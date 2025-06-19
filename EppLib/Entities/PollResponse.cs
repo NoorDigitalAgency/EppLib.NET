@@ -64,7 +64,7 @@ namespace EppLib.Entities
 
             if (resData != null)
             {
-            	ResultData = resData.InnerXml;
+                ResultData = resData.InnerXml;
                 XmlNode msgIDNode = resData.SelectSingleNode("poll:msgID", namespaces);
 
                 if (msgIDNode != null)
@@ -72,11 +72,46 @@ namespace EppLib.Entities
                     MsgId = msgIDNode.InnerText;
                 }
 
+                // Old code for extracting the domain name
                 XmlNode domainNameNode = resData.SelectSingleNode("poll:domainName", namespaces);
 
                 if (domainNameNode != null)
                 {
                     DomainName = domainNameNode.InnerText;
+                }
+
+                XmlNamespaceManager domNamespaces = new XmlNamespaceManager(doc.NameTable);
+                domNamespaces.AddNamespace("iis", "urn:se:iis:xml:epp:iis-1.2");
+                domNamespaces.AddNamespace("dom", "urn:ietf:params:xml:ns:domain-1.0");
+
+                // try to extract the domain name if it's an update notify messge
+                if (DomainName == null || DomainName.Length == 0)
+                {
+                    XmlNode domNameNode = resData.SelectSingleNode("iis:updateNotify/dom:infData/dom:name", domNamespaces);
+                    if (domNameNode != null)
+                    {
+                        DomainName = domNameNode.InnerText;
+                    }
+                }
+
+                // try to extract the domain name if it's a domain delete message
+                if (DomainName == null || DomainName.Length == 0)
+                {
+                    XmlNode delNameNode = resData.SelectSingleNode("iis:deleteNotify/dom:delete/dom:name", domNamespaces);
+                    if (delNameNode != null)
+                    {
+                        DomainName = delNameNode.InnerText;
+                    }
+                }
+
+                // try to extract the domain name if it's a domain transfer message
+                if (DomainName == null || DomainName.Length == 0)
+                {
+                    XmlNode transNameNode = resData.SelectSingleNode("iis:transferNotify/dom:trnData/dom:name", domNamespaces);
+                    if (transNameNode != null)
+                    {
+                        DomainName = transNameNode.InnerText;
+                    }
                 }
             }
         }
