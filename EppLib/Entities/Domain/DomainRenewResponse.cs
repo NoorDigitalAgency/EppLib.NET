@@ -18,6 +18,9 @@ namespace EppLib.Entities
 
     public class DomainRenewResponse : EppResponse
     {
+        public string Name { get; private set; }
+        public string ExDateText { get; private set; }
+
         protected DateTime? _exDate;
         public virtual DateTime? ExDate
         {
@@ -36,7 +39,9 @@ namespace EppLib.Entities
 
             if (renData != null)
             {
+                Name = renData.SelectSingleNode("domain:name", namespaces)?.InnerText;
                 XmlNode exDateNode = renData.SelectSingleNode("domain:exDate", namespaces);
+                ExDateText = exDateNode?.InnerText;
 
                 if (exDateNode != null)
                 {
